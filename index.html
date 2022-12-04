@@ -1,5 +1,50 @@
-<html><body>
-<a href="fourier_circles/index.html">Fourier drawings</a>
-<br/>
-<a href="reimann-analysis/index.html">Reimann analysis</a>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script-->
+    <script>
+      function gotoProject(project) {
+        window.location.href = `${project}/index.html`;
+      }
+    </script>
+
+    <div class="index">
+      <div
+        class="entry"
+        onclick="gotoProject(this.attributes.ref.value);"
+        ref="fourier_circles"
+      >
+        <div class="left-tab"></div>
+
+        <div class="left-margin"></div>
+
+        <div class="entry-content">
+          <p>Fourier circle</p>
+        </div>
+
+        <div class="right-tab"></div>
+      </div>
+
+      <div
+        class="entry"
+        onclick="gotoProject(this.attributes.ref.value);"
+        ref="reimann-analysis"
+      >
+        <div class="left-tab"></div>
+
+        <div class="left-margin"></div>
+
+        <div class="entry-content">
+          <p>Reimann analysis</p>
+        </div>
+
+        <div class="right-tab"></div>
+      </div>
+    </div>
+  </body>
+</html>
