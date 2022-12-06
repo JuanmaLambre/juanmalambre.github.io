@@ -7,44 +7,55 @@
   </head>
   <body>
     <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script-->
-    <script>
-      function gotoProject(project) {
-        window.location.href = `${project}/index.html`;
-      }
-    </script>
 
     <div class="index">
-      <div
-        class="entry"
-        onclick="gotoProject(this.attributes.ref.value);"
-        ref="fourier_circles"
-      >
-        <div class="left-tab"></div>
+      
+<div class="entry" onclick="window.location.href = './curves-surface/index.html';">
+<div class="left-tab"></div>
 
-        <div class="left-margin"></div>
+<div class="left-margin"></div>
 
-        <div class="entry-content">
-          <p>Fourier circle</p>
-        </div>
+<div class="entry-content">
+  <p>curves surface</p>
+</div>
 
-        <div class="right-tab"></div>
-      </div>
+<iframe class="thumbnail" src="curves-surface/index.html"></iframe>
 
-      <div
-        class="entry"
-        onclick="gotoProject(this.attributes.ref.value);"
-        ref="reimann-analysis"
-      >
-        <div class="left-tab"></div>
+<div class="right-tab"></div>
+</div>
 
-        <div class="left-margin"></div>
 
-        <div class="entry-content">
-          <p>Reimann analysis</p>
-        </div>
 
-        <div class="right-tab"></div>
-      </div>
+<div class="entry" onclick="window.location.href = './fourier_circles/index.html';">
+<div class="left-tab"></div>
+
+<div class="left-margin"></div>
+
+<div class="entry-content">
+  <p>fourier circles</p>
+</div>
+
+<iframe class="thumbnail" src="fourier_circles/index.html"></iframe>
+
+<div class="right-tab"></div>
+</div>
+
+
+
+<div class="entry" onclick="window.location.href = './reimann-analysis/index.html';">
+<div class="left-tab"></div>
+
+<div class="left-margin"></div>
+
+<div class="entry-content">
+  <p>reimann analysis</p>
+</div>
+
+<iframe class="thumbnail" src="reimann-analysis/index.html"></iframe>
+
+<div class="right-tab"></div>
+</div>
+
     </div>
   </body>
 </html>

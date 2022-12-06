@@ -64,7 +64,7 @@ function drawGrid() {
 }
 
 function setup() {
-  createCanvas(900, 900);
+  createCanvas(window.innerWidth, window.innerHeight);
 }
 
 function draw() {
