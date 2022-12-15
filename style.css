@@ -18,7 +18,29 @@ body {
   height: 6rem;
   width: fit-content;
   transition: all .2s ease-in-out; 
-  border-radius: 1rem;
+  border-radius: 0 1rem 1rem 0;
+  box-shadow: 0 0 1rem gray;
+  --entry-color: #f37a58;
+}
+
+.index .entry:nth-child(1) {
+  --entry-color: #81c76c;
+}
+
+.index .entry:nth-child(2) {
+  --entry-color: #84d1d6;
+}
+
+.index .entry:nth-child(3) {
+  --entry-color: #4e8cbd;
+}
+
+.index .entry:nth-child(4) {
+  --entry-color: #b388b9;
+}
+
+.index .entry:nth-child(5) {
+  --entry-color: #ef66a7;
 }
 
 .index .entry:hover{
@@ -27,7 +49,7 @@ body {
 
 .index .entry .left-tab {
   width: 3rem;
-  background-color: orange;
+  background-color: var(--entry-color);
   position: absolute;
   height: inherit;
   border-radius: 0 1rem 1rem 0;
@@ -35,8 +57,8 @@ body {
 
 .index .entry .left-margin {
   width: 3.8rem;
-  background-image: linear-gradient(to right, rgba(0,0,0,0.7) , transparent);
-  border-radius: 0 1rem 1rem 0;
+  /* background-image: linear-gradient(to right, rgba(0,0,0,0.7) , transparent); */
+  /* border-radius: 0 1rem 1rem 0; */
 }
 
 .index .entry .entry-content {
@@ -57,5 +79,5 @@ body {
 .index .entry .right-tab {
   width: 2rem;
   border-radius: 0 1rem 1rem 0;
-  background-color: orange;
+  background-color: var(--entry-color);
 }
