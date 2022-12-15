@@ -54,8 +54,8 @@ const drawingPaths = {
   },
 
   spiral: (t) => {
-    const r = 2 * (1 - t);
-    const angle = 4 * Math.PI * t;
+    const r = 500 * (1 - t);
+    const angle = 8 * Math.PI * t;
     return new p5.Vector(r * Math.cos(angle), r * Math.sin(angle));
   },
 

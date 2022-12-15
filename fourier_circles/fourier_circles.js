@@ -22,7 +22,7 @@ let t = 0;
 const linePoints = [];
 const actualPoints = [];
 
-const f = drawingPaths.butterfly;
+const f = drawingPaths.spiral;
 
 function polarVector(theta, radius = 1) {
   return new p5.Vector(radius * Math.cos(theta), radius * Math.sin(theta));
@@ -54,10 +54,8 @@ function setup() {
   const { PI, cos, sin } = Math;
 
   for (let i = -N; i <= N; i++) {
-    const ci_x = (t) =>
-      f(t).x * cos(2 * PI * i * t) + f(t).y * sin(2 * PI * i * t);
-    const ci_y = (t) =>
-      -f(t).x * sin(2 * PI * i * t) + f(t).y * cos(2 * PI * i * t);
+    const ci_x = (t) => f(t).x * cos(2 * PI * i * t) + f(t).y * sin(2 * PI * i * t);
+    const ci_y = (t) => -f(t).x * sin(2 * PI * i * t) + f(t).y * cos(2 * PI * i * t);
 
     const x = integrate(ci_x, 0, 1, 1e-15);
     const y = integrate(ci_y, 0, 1, 1e-15);

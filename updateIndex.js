@@ -34,11 +34,9 @@ const entryTemplate = (projectDir) => `
 `;
 
 function main() {
-  const exceptions = [".git", "libs"];
-
   const directories = fs
     .readdirSync(".", { withFileTypes: true })
-    .filter((direc) => direc.isDirectory() && !exceptions.includes(direc.name))
+    .filter((dir) => dir.isDirectory() && fs.readdirSync(dir.name).includes("index.html"))
     .map((dirent) => dirent.name);
 
   const entriesHtml = directories.map((dir) => entryTemplate(dir)).join("\n\n");
