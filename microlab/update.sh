@@ -11,4 +11,4 @@ cp $ORIGIN/public/models/* $DESTINATION/public/models
 cd $DESTINATION
 git add ./**
 git commit -am Update
-gitpush
+git push
