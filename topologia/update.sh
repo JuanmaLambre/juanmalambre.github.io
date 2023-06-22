@@ -4,7 +4,7 @@ DESTINATION=/Users/juanme/workplace/juanmalambre.github.io/topologia
 cd $ORIGIN
 npm run build
 
-cp -R $ORIGIN/public .
+cp -R $ORIGIN/public/** .
 
 cd $DESTINATION
 git add ./**
