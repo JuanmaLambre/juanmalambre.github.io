@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+
+    <link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.slate.min.css" rel="stylesheet" />
+    <script src="/js/bootstrap.bundle.min.js" defer></script>
+    <style>
+      #mainmenu {
+        width: 800px;
+        height: 500px;
+        zoom: 80%;
+      }
+      .numero {
+        padding: 2px;
+        background-color: black;
+      }
+
+      input[type='range'] {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mainmenu">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" data-toggle="tooltip" title="Home" data-placement="top"
+            ><i class="fas fa-home"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="tooltip" title="Fields" data-placement="top"
+            ><i class="fas fa-star"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="tooltip" title="Particles" data-placement="top"
+            ><i class="fas fa-flask"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="tooltip" title="Tab 4" data-placement="top"
+            ><i class="fas fa-home"></i
+          ></a>
+        </li>
+      </ul>
+
+      <div class="card">
+        <div class="card-header"><h5>Home</h5></div>
+        <div class="card-body panel">
+          <div class="row m-3 sliderControl">
+            <div class="col col-md-3 text-end">Escala</div>
+            <div class="col col-md-7 first">
+              <input type="range" class="range lineal" min="0" max="15" step="1" value="1" />
+            </div>
+            <div class="col col-md-2 last">100</div>
+          </div>
+
+          <div class="row m-3 sliderControl">
+            <div class="col col-md-3 text-end">Volume</div>
+            <div class="col col-md-7 first">
+              <input type="range" class="range lineal" min="0" max="14.5" step="1" value="1" />
+            </div>
+            <div class="col col-md-2 last">20</div>
+          </div>
+
+          <div class="row m-3">
+            <div class="col col-md-3 text-end">itemA1</div>
+            <div class="col col-md-9"><button class="btn btn-secondary btn-sm">Reset to defaults</button></div>
+          </div>
+
+          <div class="row m-3 sliderControl">
+            <div class="col col-md-3 text-end">Volume</div>
+            <div class="col col-md-7 first">
+              <input type="range" class="range lineal" min="0" max="14.5" step="1" value="1" />
+            </div>
+          </div>
+
+          <div class="row m-3 selectItem">
+            <div class="col col-md-3 text-end">level</div>
+            <div class="col col-md-7">
+              <select class="form-control-sm">
+                <option value="bajo">Bajo</option>
+                <option value="medio">Medio</option>
+                <option value="alto">Alto</option>
+              </select>
+            </div>
+            <div class="col col-md-2 text-center">
+              <button class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i></button
+              ><button class="btn btn-secondary btn-sm"><i class="fas fa-caret-right"></i></button>
+            </div>
+          </div>
+
+          <div class="row m-3 selectItem">
+            <div class="col col-md-3 text-end">level</div>
+            <div class="col col-md-7">
+              <select class="form-control-sm">
+                <option value="banana">banana</option>
+                <option value="manzana">manzana</option>
+                <option value="pera">pera</option>
+              </select>
+            </div>
+            <div class="col col-md-2 text-center">
+              <button class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i></button
+              ><button class="btn btn-secondary btn-sm"><i class="fas fa-caret-right"></i></button>
+            </div>
+          </div>
+
+          <div class="row m-3">
+            <div class="col col-md-3 text-end">On/off</div>
+            <div class="col col-md-9">
+              <label class="switch"><input type="checkbox" checked="" /><span class="slider round"></span></label
+              ><span class="switchText"> bla bla bla</span>
+            </div>
+          </div>
+
+          <div class="row m-2">
+            <div class="col">
+              <button type="button" class="btn btn-primary btn-lg"><i class="fas fa-flag"></i></button>
+              <button type="button" class="btn btn-primary btn-lg"><i class="fas fa-draw-polygon"></i></button>
+              <button type="button" class="btn btn-primary btn-lg"><i class="fas fa-walking"></i></button>
+              <button type="button" class="btn btn-primary btn-lg"><i class="fas fa-trash-alt"></i></button>
+              <button type="button" class="btn btn-primary btn-lg"><i class="fas fa-star"></i></button>
+
+              <button type="button" class="btn btn-primary btn-lg">
+                <i class="fas fa-square" style="color: red"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">&nbsp;</div>
+      </div>
+    </div>
+  </body>
+</html>

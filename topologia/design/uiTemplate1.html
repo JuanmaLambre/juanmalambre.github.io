@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+
+    <div id="mainmenu">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" data-toggle="tooltip" title="Home" data-placement="top"
+            ><i class="fas fa-home"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="tooltip" title="Fields" data-placement="top"
+            ><i class="fas fa-star"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="tooltip" title="Particles" data-placement="top"
+            ><i class="fas fa-flask"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="tooltip" title="Tab 4" data-placement="top"
+            ><i class="fas fa-home"></i
+          ></a>
+        </li>
+      </ul>
+      <div class="card">
+        <div class="card-header"><h5>Home</h5></div>
+        <div class="card-body panel">
+          <div class="form-row fila sliderControl">
+            <div class="col col-md-3 text-right">Volume</div>
+            <div class="col col-md-7 first">
+              <input type="range" class="range lineal" min="0" max="14.5" step="1" value="1" />
+              <div class="spacer">&nbsp;</div>
+            </div>
+            <div class="col col-md-2 last">
+              <input type="text" class="form-control-plaintext numero" size="4" maxlength="4" value="1" />
+            </div>
+          </div>
+          <div class="form-row fila sliderControl">
+            <div class="col col-md-3 text-right">speed</div>
+            <div class="col col-md-7 first">
+              <input type="range" class="range lineal" min="0" max="100" step="any" value="10" /><label
+                class="checkboxContainer"
+                ><input type="checkbox" /><span class="checkmark"></span
+              ></label>
+            </div>
+            <div class="col col-md-2 last">
+              <input type="text" class="form-control-plaintext numero" size="4" maxlength="4" value="10.000" />
+            </div>
+          </div>
+          <div class="form-row fila undefined">
+            <div class="col col-md-3 text-right">itemA1</div>
+            <div class="col col-md-9"><button class="btn btn-secondary btn-sm">task 1</button></div>
+          </div>
+          <div class="form-row fila selectItem">
+            <div class="col col-md-3 text-right">level</div>
+            <div class="col col-md-7">
+              <select class="form-control-sm">
+                <option value="bajo">Bajo</option>
+                <option value="medio">Medio</option>
+                <option value="alto">Alto</option>
+              </select>
+            </div>
+            <div class="col col-md-2 text-center">
+              <button class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i></button
+              ><button class="btn btn-secondary btn-sm"><i class="fas fa-caret-right"></i></button>
+            </div>
+          </div>
+          <div class="form-row fila selectItem">
+            <div class="col col-md-3 text-right">level</div>
+            <div class="col col-md-7">
+              <select class="form-control-sm">
+                <option value="banana">banana</option>
+                <option value="manzana">manzana</option>
+                <option value="pera">pera</option>
+              </select>
+            </div>
+            <div class="col col-md-2 text-center">
+              <button class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i></button
+              ><button class="btn btn-secondary btn-sm"><i class="fas fa-caret-right"></i></button>
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <div class="form-row fila undefined">
+            <div class="col col-md-3 text-right">On/off</div>
+            <div class="col col-md-9">
+              <label class="switch"><input type="checkbox" checked="" /><span class="slider round"></span></label
+              ><span class="switchText"> bla bla bla</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">&nbsp;</div>
+      </div>
+    </div>
+  </body>
+</html>
