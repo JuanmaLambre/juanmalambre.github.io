@@ -5,8 +5,7 @@ cd $ORIGIN
 npm run build
 
 cp $ORIGIN/dist/app.bundle.js $ORIGIN/dist/app.css $ORIGIN/dist/index.html $DESTINATION
-cp $ORIGIN/public/maps/* $DESTINATION/public/maps
-cp $ORIGIN/public/models/* $DESTINATION/public/models
+cp -r $ORIGIN/public/** $DESTINATION/public/
 
 cd $DESTINATION
 git add ./**
