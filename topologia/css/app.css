@@ -30,3 +30,12 @@ canvas {
   top: 0;
   left: 0;
 }
+#info {
+  z-index: 10000 !important;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 120%;
+}
