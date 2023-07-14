@@ -1,5 +1,5 @@
 ORIGIN=/Users/juanme/workplace/CITEP/topologiaVRUBA
-DESTINATION=/Users/juanme/workplace/juanmalambre.github.io/topologia
+DESTINATION=/Users/juanme/workplace/juanmalambre.github.io/topografia
 
 cd $ORIGIN
 npm run build
