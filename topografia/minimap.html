@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Interactive objects test</title>
+    <style type="text/css">
+      body {
+        margin: 0;
+        background-color: #8888;
+        font-family: sans-serif;
+      }
+      canvas {
+        display: block;
+      }
+
+      #loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 200%;
+        text-align: center;
+        z-index: 1000;
+        color: white;
+        padding: 200px;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      #container3D {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      #VRButton {
+        z-index: 10000 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container3D"></div>
+    <div id="loader">Loading...</div>
+    <script src="minimap.bundle.js" type="text/javascript"></script>
+  </body>
+</html>

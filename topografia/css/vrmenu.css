@@ -1,0 +1,79 @@
+/*  reglas generales */
+#vrmenu {
+  position: absolute;
+  width: 450px;
+}
+
+#vrmenu .card-body {
+  min-height: 400px;
+  background-color: #444444;
+}
+
+#vrmenu input[type='range'] {
+  width: 100%;
+}
+
+/*  topbar */
+
+#vrmenu a.nav-link {
+  background-color: #888888;
+  background-image: none;
+}
+
+#vrmenu a.nav-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#vrmenu #footer {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+/*  modes */
+
+#vrmenu #modesBar button {
+  background-image: none;
+  background-color: #777777;
+}
+
+#vrmenu #modesBar button.active {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#vrmenu #modesBar button {
+  margin: 2px;
+}
+
+/* colors */
+
+#vrmenu #colors button {
+  margin: 2px;
+}
+
+#vrmenu #colors .colorswatch {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  position: relative;
+  margin: 1px;
+}
+
+#vrmenu #colors .dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 5px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+}
+
+#vrmenu .sliderControl .label {
+  font-size: 80%;
+}
