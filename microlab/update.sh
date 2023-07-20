@@ -6,7 +6,6 @@ cd $ORIGIN
 npm run build
 
 cp $ORIGIN/dist/app.bundle.js $ORIGIN/dist/app.css $ORIGIN/dist/index.html $DESTINATION
-cp $ORIGIN/public/fonts/* $REPODIR/public/
 cp $ORIGIN/dist/*.mp3 $REPODIR/public/
 cp -r $ORIGIN/public/** $DESTINATION/../public/
 
