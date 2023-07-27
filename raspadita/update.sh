@@ -1,4 +1,4 @@
-DEST=$(echo $(pwd)'/'$0)
+DEST=$(dirname $(pwd)'/'$0)
 
 cd ~/workplace/raspadita-ypf
 npm run build
