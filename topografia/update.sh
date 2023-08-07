@@ -1,4 +1,4 @@
-ORIGIN=/Users/juanme/workplace/CITEP/topologiaVRUBA
+ORIGIN=/Users/juanme/workplace/CITEP/topografiaVRUBA
 DESTINATION=/Users/juanme/workplace/juanmalambre.github.io/topografia
 
 cd $ORIGIN
