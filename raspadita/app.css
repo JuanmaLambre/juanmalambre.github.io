@@ -16,9 +16,31 @@ body {
 .cards-grid .card {
   width: 160px;
   height: 240px;
-  /* background: radial-gradient(circle, rgb(233, 115, 115) 0%, rgba(0,212,255) 100%) ; */
-  background: radial-gradient(circle, cyan 0%, cornsilk 30%, magenta 60%) ;
-  /* background-color: cornsilk; */
+  background: #333344;
+}
+
+.cards-grid .card.c1 {
+  background: radial-gradient(circle, rgba(20,135,0,1) 0%, rgba(0,212,255,1) 100%);
+}
+
+.cards-grid .card.c2 {
+  background: linear-gradient(0deg, rgba(255,228,200,1) 0%, rgba(253,186,45,1) 100%);
+}
+
+.cards-grid .card.c3 {
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+}
+
+.cards-grid .card.c4 {
+  background: radial-gradient(farthest-corner at 40px 40px, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+}
+
+.cards-grid .card.c5 {
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+
+.cards-grid .card.c6 {
+  background: radial-gradient(circle at 100%, #000, coral 50%, #eee 75%, #eee 75%);
 }
 
 #three-canvas {
