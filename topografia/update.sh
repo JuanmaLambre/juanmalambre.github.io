@@ -10,4 +10,4 @@ cp -R $ORIGIN/public/** .
 
 git add ./**
 git commit -am Update
-git push
+#git push
