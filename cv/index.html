@@ -5,15 +5,17 @@
     <title></title>
     <link href="cv.css" rel="stylesheet" />
 
+    <script>
+      console.info("Use query param 'paused' to pause all animations");
+      const paused = new URLSearchParams(window.location.search).get("paused") != null;
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="scripts/circle-pixels-cloud.js"></script>  
     <script src="scripts/maurer-rose.js"></script>  
     <script src="scripts/metaballs.js"></script> 
     <script src="scripts/breathing-circle.js"></script> 
 
-    <script>
-      console.info("Use query param 'paused' to pause all animations")
-    </script>
   </head>
 
   <body>

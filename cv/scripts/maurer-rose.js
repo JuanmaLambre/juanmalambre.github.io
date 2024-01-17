@@ -1,6 +1,5 @@
 new p5((s) => {
   const { cos, sin } = Math;
-  const paused = new URLSearchParams(window.location.search).get("paused") != null;
 
   let d = 39;
   let n = 1.95;

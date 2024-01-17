@@ -125,8 +125,6 @@ function setupUniforms() {
 }
 
 new p5((s) => {
-  const paused = new URLSearchParams(window.location.search).get("paused") != null;
-
   class Metaball {
     constructor() {
       this.x = random(s.width * 2);
