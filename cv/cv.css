@@ -335,7 +335,7 @@ body {
   width: 300px;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 500px) {
   body {
     background-color: var(--primary-bg);
     margin: 0;
