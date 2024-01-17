@@ -1,12 +1,12 @@
 const THRESHOLD = 100;
-const metaballs = new Array(16);
+const metaballs = new Array();
 
 let shader;
 
-const frag = `
+const frag = (n) => `
 precision highp float;
 
-#define METABALLS_COUNT ${metaballs.length}
+#define METABALLS_COUNT ${n}
 #define EPSILON 0.000001
 
 uniform float threshold;
@@ -157,9 +157,10 @@ new p5((s) => {
     const { clientWidth: width, clientHeight: height } = canvas;
     s.createCanvas(width, height, s.WEBGL, canvas);
 
+    metaballs.length = Math.round((width * height) / 10000);
     for (let i = 0; i < metaballs.length; i++) metaballs[i] = new Metaball();
 
-    shader = s.createShader(vert, frag);
+    shader = s.createShader(vert, frag(metaballs.length));
 
     s.noStroke();
   };
