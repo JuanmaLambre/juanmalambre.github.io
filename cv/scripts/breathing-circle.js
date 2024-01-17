@@ -1,4 +1,6 @@
 new p5((s) => {
+  const paused = new URLSearchParams(window.location.search).get("paused") != null;
+
   class CirclePath {
     static MAX_RADIUS;
     static MIN_RADIUS;
@@ -59,5 +61,7 @@ new p5((s) => {
       circlePath.draw();
       circlePath.update();
     }
+
+    if (paused) s.noLoop();
   };
 });

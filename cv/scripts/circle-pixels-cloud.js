@@ -4,6 +4,7 @@ const NOISE_THRESHOLD = 0.5; // -1 to 1
 const SPEED = 1 / 2000;
 
 new p5((s) => {
+  const paused = new URLSearchParams(window.location.search).get("paused") != null;
   const { PI, cos } = Math;
 
   s.setup = function () {
@@ -47,5 +48,7 @@ new p5((s) => {
         }
       }
     }
+
+    if (paused) s.noLoop();
   };
 });

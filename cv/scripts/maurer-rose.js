@@ -1,5 +1,6 @@
 new p5((s) => {
-  const { cos, sin, PI } = Math;
+  const { cos, sin } = Math;
+  const paused = new URLSearchParams(window.location.search).get("paused") != null;
 
   let d = 39;
   let n = 1.95;
@@ -15,6 +16,11 @@ new p5((s) => {
   };
 
   s.draw = function () {
+    if (paused) {
+      n = 6;
+      d = 71;
+    }
+
     s.translate(s.width / 2, s.height / 2);
     s.background(0);
 
@@ -34,5 +40,7 @@ new p5((s) => {
     s.endShape();
 
     n += 0.000051;
+
+    if (paused) s.noLoop();
   };
 });

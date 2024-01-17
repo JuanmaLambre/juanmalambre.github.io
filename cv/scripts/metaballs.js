@@ -55,7 +55,7 @@ void main() {
 
   float radialDist = sqrt(1.0 / sum);
   float separation = 40.0;
-  float weight = 2.0;
+  float weight = 4.0;
   bool modCriteria = mod(radialDist, separation) < weight;
 
   bool insideCriteria = sum > threshold;
@@ -64,6 +64,18 @@ void main() {
     newColor = calculateMetaColor();
   } else if (modCriteria) {
     newColor = calculateMetaColor() * 1.3;
+
+    float border = weight * 0.3;
+    float d = mod(radialDist, separation);
+    if (d < border) {
+      float a = d / border;
+      newColor *= a;
+    }
+
+    if (d > weight - border) {
+      float a = (weight - d) / border;
+      newColor *= a;
+    }
   }
 
   gl_FragColor = newColor;
@@ -113,6 +125,8 @@ function setupUniforms() {
 }
 
 new p5((s) => {
+  const paused = new URLSearchParams(window.location.search).get("paused") != null;
+
   class Metaball {
     constructor() {
       this.x = random(s.width * 2);
@@ -162,5 +176,7 @@ new p5((s) => {
     s.plane(width, height);
 
     for (let metaball of metaballs) metaball.update();
+
+    if (paused && s.frameCount > 1) s.noLoop();
   };
 });
