@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="cv.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="scripts/circle-pixels-cloud.js"></script>  
+    <script src="scripts/maurer-rose.js"></script>  
+    <script src="scripts/metaballs.js"></script> 
+    <script src="scripts/breathing-circle.js"></script> 
+  </head>
+
+  <body>
+    <div class="content">
+      <div class="page">
+        <div class="header">
+          <div class="profile-pic"></div>
+
+          <canvas id="header-bg"></canvas>
+          
+          <div class="top-header">
+            <span class="name">Juan Manuel Lambre</span>
+            <span class="profession">Ing. en Informática</span>
+          </div>
+
+          <div class="info-header">
+            <div class="info-row info-top">
+              <div class="info-entry">
+                <img class="info-icon" src="assets/email.svg"></img>
+                juanmlambre@gmail.com
+              </div>
+
+              <div class="info-entry">
+                <img class="info-icon" src="assets/phone.svg"></img>
+                +54 11 6542 2582
+              </div>
+            </div>
+
+            <div class="info-row info-bottom">
+              <div class="info-entry">
+                <img class="info-icon" src="assets/location.svg"></img>
+                Palermo, CABA, Argentina
+              </div>
+
+              <div class="info-entry">
+                <img class="info-icon" src="assets/calendar.svg"></img>
+                27 dic, 1993
+              </div>
+
+              <div class="info-entry">
+                <img class="info-icon" src="assets/gender.svg"></img>
+                Él
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="resume">
+          <div class="resume-col1">
+            <div class="topic-content topic-experience">
+              <div class="topic-title">
+                <img class="topic-icon" src="assets/xp.svg"></img>
+                Experiencias
+              </div>
+
+              <div class="experience">
+                <span class="xp-title paragraph-title">DESARROLLO VR @ Proyecto CITEP</span>
+                <span class="xp-time paragraph-subtitle">MARZO 2023 - AGOSTO 2023</span>
+                <span class="xp-description paragraph-desc">
+                  Diseño y desarrollo de aplicaciones interactivas de realidad virtual, destinadas a diferentes
+                  facultades de la UBA para uso estudiantil
+                </span>
+              </div>
+
+              <div class="experience">
+                <span class="xp-title paragraph-title">Proyecto Raspadita @ YPF</span>
+                <span class="xp-time paragraph-subtitle">JUNIO 2023 - AGOSTO 2023</span>
+                <span class="xp-description paragraph-desc">
+                  Desarrollo de raspadita digital para el programa ServiClub de YPF
+                </span>
+              </div>
+
+              <div class="experience">
+                <span class="xp-title paragraph-title">ING. DE SOFTWARE @ CableViewer</span>
+                <span class="xp-time paragraph-subtitle">NOVIEMBRE 2021 - NOVIEMBRE 2022</span>
+                <span class="xp-description paragraph-desc">
+                  Diseño y desarrollo de aplicación web para modelado dinámico de cables industriales en 2D y 3D.
+                </span>
+              </div>
+
+              <div class="experience">
+                <span class="xp-title paragraph-title">ARQUITECTO DE SOFTWARE @ Sonhos Labs</span>
+                <span class="xp-time paragraph-subtitle">MARZO 2020 - AGOSTO 2021</span>
+                <span class="xp-description paragraph-desc">
+                  Diseño y desarrollo de arquitectura back-end para plataforma de geolocalización de alto rendimiento en procesamiento, escritura y consulta de datos.
+                  <br/>
+                  Desarrollo de plataforma web para construcción de páginas web.
+                </span>
+              </div>
+
+              <div class="experience">
+                <span class="xp-title paragraph-title">DESARROLLO RA @ Proyecto UBATIC</span>
+                <span class="xp-time paragraph-subtitle">JULIO 2019 - DICIEMBRE 2019</span>
+                <span class="xp-description paragraph-desc">
+                  Diseño y desarrollo de aplicaciones interactivas de realidad
+                  aumentada, destinadas a materias de ingeniería (e.g. física,
+                  construcciones, electrónica, entre otras)
+                </span>
+              </div>
+
+              <div class="experience">
+                <span class="xp-title paragraph-title">ING. EN SOFTWARE @ Mercado Libre SRL</span>
+                <span class="xp-time paragraph-subtitle">OCTUBRE 2016 - JULIO 2018</span>
+                <span class="xp-description paragraph-desc">
+                  Desarrollo de SDK interno (web y mobile) para la colección de
+                  datos de navegación del usuario. Mantenimiento de plataformas
+                  de data science de alta performance para procesar y consultar.
+                  Desarrollo full-stack para programa de lealtad del usuario.
+                </span>
+              </div>
+
+              <div class="experience">
+                <span class="xp-title paragraph-title">WEB SERVICES DEV @ The Amalgama</span>
+                <span class="xp-time paragraph-subtitle">JUNIO 2015 - FEBRERO 2016</span>
+                <span class="xp-description paragraph-desc">
+                  Desarrollo de servicios web y back-end para aplicaciones móbiles.
+                </span>
+              </div>
+            </div>
+
+            <canvas id="metaballs-canvas"></canvas>
+
+            <div class="topic-content topic-studies">
+              <div class="topic-title">
+                <img class="topic-icon" src="assets/edu.svg"></img>
+                Estudios
+              </div>
+
+              <div class="study">
+                <span class="study-title paragraph-title">Ingeniería en Informática @ UBA</span>
+                <span class="study-time paragraph-subtitle">GRADUADO EN 2020</span>
+              </div>
+
+              <div class="study">
+                <span class="study-title paragraph-title">Intercambio académico @ FIB UPC</span>
+                <span class="study-time paragraph-subtitle">FEBRERO 2016 - JULIO 2016</span>
+                <span class="study-description paragraph-desc">
+                  Inteligencia artificial, Sistemas Operativos Avanzados, Interacción y Diseño de Interfaces
+                </span>
+              </div>
+
+              <div class="study">
+                <span class="study-title paragraph-title">Bachillerato Bilingüe en Ciencias y Letras @ St. Xavier's College</span>
+                <span class="study-time paragraph-subtitle">GRADUADO EN 2011</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="resume-col2">
+            <div class="topic-content topic-about">
+              <div class="topic-title">
+                <img class="topic-icon" src="assets/smile.svg"></img>
+                Quién soy
+              </div>
+
+              <span class="about-description">
+                Un pie en software y otro pie en el arte.
+                <br/><br/>
+                Desarrollador profesional, músico amateur y artista digital cuando me inspiro.
+              </span>
+            </div>
+
+            <div class="canvas-holder">
+              <canvas id="maurer-canvas"></canvas>
+            </div>
+
+            <div class="topic-content topic-skills">
+              <div class="topic-title">
+                <img class="topic-icon" src="assets/skills2.svg"></img>
+                Habilidades
+              </div>
+
+              <div class="skills-box">
+                <span class="skill aws">AWS</span>
+                <span class="skill sql">SQL</span>
+                <span class="skill arq">Arquitectura Cloud</span>
+                <span class="skill apis">RESTful APIs</span>
+                <span class="skill elastic">Elasticsearch</span>
+                <span class="skill three">Three.js</span>
+                <span class="skill ts">TypeScript</span>
+                <span class="skill react">ReactJS</span>
+                <span class="skill py">Python</span>
+                <span class="skill webgl">WebGL</span>
+                <span class="skill java">Java</span>
+              </div>
+            </div>
+
+            <div class="topic-content topic-languages">
+              <div class="topic-title">
+                <img class="topic-icon" src="assets/lang.svg"></img>
+                Idiomas
+              </div>
+
+              <div class="language-entry">
+                <span class="language-name">Español</span>
+                <span class="language-level">nativo</span>
+              </div>
+
+              <div class="language-entry">
+                <span class="language-name">Inglés</span>
+                <span class="language-level">C1</span>
+              </div>
+            </div>
+
+            <canvas id="breathing-circle"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
