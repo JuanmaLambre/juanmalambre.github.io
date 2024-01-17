@@ -18,6 +18,7 @@ body {
   display: flex;
   justify-content: center;
   height: 100%;
+  position: relative;
   width: 100%;
 
   --primary-bg: #000000;
@@ -37,11 +38,16 @@ body {
   --info-svg: invert(42%) sepia(29%) saturate(358%) hue-rotate(154deg) brightness(90%) contrast(87%); /* https://codepen.io/sosuke/pen/Pjoqqp */
 }
 
+.page-header {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+
 .page {
   background: linear-gradient(180deg, transparent 40rem, black 40rem, black 100%);
-  border: 2px solid #888888;
   height: auto;
-  margin: 2rem;
+  margin: 0 2rem;
   max-width: 60rem;
   position: relative;
   width: 100%;
@@ -58,26 +64,19 @@ body {
   background-color: rgb(214, 255, 241);
   border: 1px solid black;
   height: 10rem;
-  left: 1rem;
+  left: 1.7rem;
   position: absolute;
   top: 10%;
   width: 10rem;
   z-index: 99;
 }
 
-#header-bg {
-  position: absolute;
-  height: calc(100% + 50px);
-  width: calc(100% + 50px);
-  z-index: -1;
-}
-
 .top-header {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  padding-left: calc(var(--pic-size) + 2rem + 1rem);
-  padding-top: 1rem;
+  padding-left: calc(var(--pic-size) + 3.5rem);
+  padding-top: 7.7rem;
 }
 
 .top-header > * {
@@ -100,8 +99,8 @@ body {
   background: linear-gradient(180deg, transparent, black 1.4rem);
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
-  padding-left: calc(var(--pic-size) + 2rem + 1rem);
+  padding: 1rem 3rem 0;
+  /* padding-left: calc(var(--pic-size) + 2rem + 1rem); */
 }
 
 .info-header .info-row {
@@ -202,8 +201,7 @@ body {
 .experience {
   display: flex;
   flex-direction: column;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin: 0.8rem 0;
 }
 
 .experience .xp-time {
@@ -259,7 +257,7 @@ body {
 }
 
 .skill.apis {
-  left: 120px;
+  left: 163px;
   top: 110px;
 }
 
@@ -279,7 +277,7 @@ body {
 }
 
 .skill.react {
-  left: 147px;
+  left: 167px;
   top: 177px;
 }
 
@@ -316,6 +314,14 @@ body {
   text-transform: uppercase;
   color: var(--secondary-text);
   font-size: 0.8rem;
+}
+
+#circle-cloud {
+  height: calc(100% + 50px);
+  position: absolute;
+  /* width: calc(100% + 50px); */
+  width: 100vw;
+  z-index: -1;
 }
 
 #maurer-canvas {
