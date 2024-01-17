@@ -12,6 +12,7 @@
 body {
   background-color: black;
   font-family: Roboto;
+  margin: 0;
 }
 
 .content {
@@ -38,10 +39,19 @@ body {
   --info-svg: invert(42%) sepia(29%) saturate(358%) hue-rotate(154deg) brightness(90%) contrast(87%); /* https://codepen.io/sosuke/pen/Pjoqqp */
 }
 
-.page-header {
+.content-header {
+  justify-self: left;
   display: flex;
   flex-direction: column;
   position: absolute;
+}
+
+.content-header .fade-out {
+  background: linear-gradient(180deg, transparent, black 1.4rem);
+  bottom: 0;
+  height: 7.9rem;
+  position: absolute;
+  width: 100%;
 }
 
 .page {
@@ -96,7 +106,6 @@ body {
 }
 
 .info-header {
-  background: linear-gradient(180deg, transparent, black 1.4rem);
   display: flex;
   flex-direction: column;
   padding: 1rem 3rem 0;
@@ -317,8 +326,7 @@ body {
 }
 
 #circle-cloud {
-  height: calc(100% + 50px);
-  position: absolute;
+  height: 20rem;
   /* width: calc(100% + 50px); */
   width: 100vw;
   z-index: -1;
