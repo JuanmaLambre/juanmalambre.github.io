@@ -19,7 +19,7 @@ new p5((s) => {
     const { width, height, map, noise } = s;
     const t = s.millis() * SPEED;
 
-    s.background(0);
+    s.clear();
     s.noStroke();
 
     for (let x = 0; x < width; x += GRID_DISCRETIZATION) {
@@ -29,7 +29,7 @@ new p5((s) => {
 
         const rNoise = noise(cos(t), x / NOISE_ZOOM, y / NOISE_ZOOM / 1000);
         if (rNoise > NOISE_THRESHOLD) {
-          const alpha = map(rNoise, NOISE_THRESHOLD, 1, 0, 230);
+          const alpha = map(rNoise, NOISE_THRESHOLD, 1, 0, 200);
           s.fill(200, 0, 120, alpha);
           s.circle(x, y, circleRadius);
         }

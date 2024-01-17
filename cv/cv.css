@@ -10,19 +10,11 @@
 }
 
 body {
-  background-color: black;
+  background-color: var(--primary-bg);
   font-family: Roboto;
   margin: 0;
-}
 
-.content {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  position: relative;
-  width: 100%;
-
-  --primary-bg: #000000;
+  --primary-bg: black;
   --secondary-bg: #1d1d1d;
   --topic-shadow: #484747;
 
@@ -39,6 +31,14 @@ body {
   --info-svg: invert(42%) sepia(29%) saturate(358%) hue-rotate(154deg) brightness(90%) contrast(87%); /* https://codepen.io/sosuke/pen/Pjoqqp */
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
 .content-header {
   justify-self: left;
   display: flex;
@@ -47,7 +47,7 @@ body {
 }
 
 .content-header .fade-out {
-  background: linear-gradient(180deg, transparent, black 1.4rem);
+  background: linear-gradient(180deg, transparent, var(--primary-bg) 1.4rem);
   bottom: 0;
   height: 7.9rem;
   position: absolute;

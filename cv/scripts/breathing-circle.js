@@ -53,7 +53,7 @@ new p5((s) => {
 
   s.draw = function () {
     s.translate(s.width / 2, s.height / 2);
-    s.background(0);
+    s.clear();
 
     for (let circlePath of circles) {
       circlePath.draw();

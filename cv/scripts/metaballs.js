@@ -171,7 +171,7 @@ new p5((s) => {
     setupUniforms();
     s.shader(shader);
 
-    s.background(0);
+    s.clear();
     s.plane(width, height);
 
     for (let metaball of metaballs) metaball.update();

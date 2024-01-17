@@ -21,7 +21,7 @@ new p5((s) => {
     }
 
     s.translate(s.width / 2, s.height / 2);
-    s.background(0);
+    s.clear();
 
     s.beginShape();
     for (let i = 0; i <= 360; i += 1) {
