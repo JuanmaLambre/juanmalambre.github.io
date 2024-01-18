@@ -17,7 +17,7 @@ new p5((s) => {
 
   s.draw = function () {
     const { width, height, map, noise } = s;
-    const t = s.millis() * SPEED;
+    const t = paused ? 2000 : s.millis() * SPEED;
 
     s.clear();
     s.noStroke();
