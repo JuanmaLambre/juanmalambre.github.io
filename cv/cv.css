@@ -55,7 +55,6 @@ body {
 }
 
 .page {
-  background: linear-gradient(180deg, transparent 40rem, black 40rem, black 100%);
   height: auto;
   margin: 0 2rem;
   max-width: 60rem;
@@ -152,7 +151,6 @@ body {
 }
 
 .resume {
-  background-color: var(--primary-bg);
   display: flex;
   padding: 0.3rem;
 }
