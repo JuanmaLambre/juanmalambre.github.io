@@ -1,7 +1,7 @@
 const NOISE_ZOOM = 0.1;
 const GRID_DISCRETIZATION = 12;
-const NOISE_THRESHOLD = 0.5; // -1 to 1
-const SPEED = 1 / 2000;
+const NOISE_THRESHOLD = 0.45; // -1 to 1
+const SPEED = 1 / 6000;
 
 new p5((s) => {
   const { PI, cos, sin } = Math;
@@ -43,7 +43,7 @@ new p5((s) => {
 
         const gNoise = noise(cos(t) + 200, x / NOISE_ZOOM, y / NOISE_ZOOM / 1000);
         if (gNoise > NOISE_THRESHOLD) {
-          const alpha = map(gNoise, NOISE_THRESHOLD, 1, 0, 170);
+          const alpha = map(gNoise, NOISE_THRESHOLD, 1, 0, 50);
           s.fill(0, 200, 0, alpha);
           s.circle(x, y, circleRadius);
         }

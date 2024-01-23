@@ -134,7 +134,7 @@ new p5((s) => {
       let g = 1 - r;
       this.ballColor = new p5.Vector(r, g, 1.0);
 
-      this.velocity = p5.Vector.random2D().normalize().mult(random(0.5, 1));
+      this.velocity = p5.Vector.random2D().normalize().mult(random(0.1, 0.3));
     }
 
     update() {

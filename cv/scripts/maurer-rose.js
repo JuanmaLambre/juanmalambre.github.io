@@ -2,7 +2,7 @@ new p5((s) => {
   const { cos, sin } = Math;
 
   let d = 39;
-  let n = 1.95;
+  let n = 1.9523;
 
   s.setup = function () {
     const canvas = document.getElementById("maurer-canvas");
@@ -38,7 +38,7 @@ new p5((s) => {
     }
     s.endShape();
 
-    n += 0.000051;
+    n += 0.000051 * 0.3;
 
     if (paused) s.noLoop();
   };
