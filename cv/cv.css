@@ -339,6 +339,7 @@ body {
 #metaballs-canvas {
   margin: 0.7rem;
   width: calc(100% - 1.4rem);
+  height: 250px;
 }
 
 #breathing-circle {
