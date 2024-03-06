@@ -107,7 +107,7 @@ body {
 .info-header {
   display: flex;
   flex-direction: column;
-  padding: 1rem 3rem 0;
+  padding: 1rem 1.2rem 0;
   /* padding-left: calc(var(--pic-size) + 2rem + 1rem); */
 }
 
@@ -196,6 +196,7 @@ body {
 }
 
 .paragraph-subtitle {
+  text-transform: uppercase;
   color: var(--dark-accent);
   font-size: 0.9rem;
 }
