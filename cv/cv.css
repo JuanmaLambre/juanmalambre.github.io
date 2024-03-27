@@ -361,7 +361,7 @@ body {
 }
 
 #pk-container #pk-filter {
-  background: radial-gradient(transparent, black 75%);
+  background: radial-gradient(transparent 50%, black 75%);
   position: absolute;
   width: inherit;
   height: inherit;
