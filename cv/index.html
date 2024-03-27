@@ -9,13 +9,6 @@
       console.info("Use query param 'paused' to pause all animations");
       const paused = new URLSearchParams(window.location.search).get("paused") != null;
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="scripts/circle-pixels-cloud.js"></script>  
-    <script src="scripts/maurer-rose.js"></script>  
-    <script src="scripts/metaballs.js"></script> 
-    <script src="scripts/breathing-circle.js"></script> 
-
   </head>
 
   <body>
@@ -186,8 +179,9 @@
               </span>
             </div>
 
-            <div class="canvas-holder">
-              <canvas id="maurer-canvas"></canvas>
+            <div id="pk-container">
+              <div id="pk-filter"></div>
+              <canvas id="periodic-kaleido"></canvas>
             </div>
 
             <div class="topic-content topic-skills">
@@ -228,10 +222,19 @@
               </div>
             </div>
 
-            <canvas id="breathing-circle"></canvas>
+            <div id="maurer-container">
+              <canvas id="maurer-canvas"></canvas>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="scripts/circle-pixels-cloud.js"></script>  
+    <script src="scripts/maurer-rose.js"></script>  
+    <script src="scripts/metaballs.js"></script> 
+    <script src="scripts/breathing-circle.js"></script> 
+    <script src="scripts/periodic-kaleido.js"></script> 
   </body>
 </html>

@@ -27,8 +27,10 @@ new p5((s) => {
 
   let circles;
 
+  const canvas = document.getElementById("breathing-circle");
+  if (!canvas) return;
+
   s.setup = function () {
-    const canvas = document.getElementById("breathing-circle");
     const { clientWidth: width, clientHeight: height } = canvas;
     s.createCanvas(width, height, "2d", canvas);
 

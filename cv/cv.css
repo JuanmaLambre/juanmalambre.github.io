@@ -331,7 +331,11 @@ body {
   z-index: -1;
 }
 
-#maurer-canvas {
+#maurer-container {
+  margin: 1rem;
+}
+
+#maurer-container #maurer-canvas {
   height: 300px;
   width: 300px;
 }
@@ -347,6 +351,28 @@ body {
   height: 300px;
   padding-top: 1.3rem;
   width: 300px;
+}
+
+#pk-container {
+  display: flex;
+  margin: 1.5rem 1rem;
+  width: 300px;
+  height: 300px;
+}
+
+#pk-container #pk-filter {
+  background: radial-gradient(transparent, black 75%);
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  z-index: 9;
+}
+
+#pk-container #periodic-kaleido {
+  align-self: center;
+  position: absolute;
+  width: inherit;
+  height: inherit;
 }
 
 @media (max-width: 500px) {
