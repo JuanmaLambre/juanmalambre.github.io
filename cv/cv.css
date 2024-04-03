@@ -9,6 +9,10 @@
   src: url("assets/Roboto/Roboto-Bold.ttf");
 }
 
+::selection {
+  background: #83306e;
+}
+
 body {
   background-color: var(--primary-bg);
   font-family: Roboto;
