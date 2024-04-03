@@ -265,13 +265,18 @@ body {
 }
 
 .skill.apis {
-  left: 163px;
-  top: 110px;
+  left: 130px;
+  top: 100px;
 }
 
 .skill.elastic {
   left: 50px;
-  top: 142px;
+  top: 137px;
+}
+
+.skill.mongodb {
+  left: 189px;
+  top: 138px;
 }
 
 .skill.three {
@@ -300,7 +305,7 @@ body {
 }
 
 .skill.java {
-  left: 170px;
+  left: 182px;
   top: 212px;
 }
 
