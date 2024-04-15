@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ORIGIN_DIR="/Users/juanme/workplace/UBATIC/resorte"
 DESTINATION_DIR="/Users/juanme/workplace/juanmalambre.github.io/uba/resorte"
 

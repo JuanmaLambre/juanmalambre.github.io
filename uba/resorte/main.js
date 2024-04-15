@@ -3216,8 +3216,8 @@ function onResize() {
     perspectiveCam.updateProjectionMatrix();
     orthoCam.left = -5;
     orthoCam.right = 5;
-    orthoCam.top = (5 * aspect) / 2;
-    orthoCam.bottom = (-5 * aspect) / 2;
+    orthoCam.top = 5 / aspect;
+    orthoCam.bottom = -5 / aspect;
     orthoCam.updateProjectionMatrix();
     renderer.setSize(htmlContainer.offsetWidth, htmlContainer.offsetHeight);
 }
