@@ -2631,7 +2631,7 @@ var Dat;
             .add(Dat.options, "friction", 0, 1, 0.1)
             .onChange(datChangeDispatcher("dg-friction"))
             .onFinishChange(datFinishChangeDispatcher("dg-friction"))
-            .name("μ");
+            .name("μ rozamiento");
         model
             .add(Dat.options, "radius", 0.25, 1, 0.05)
             .onChange(datChangeDispatcher("dg-radius"))
@@ -2899,15 +2899,16 @@ class SpringModel {
     }
     step(timestep) {
         const cycles = 20;
+        const g = 9.81;
         const cycleStep = timestep / cycles;
         const { idleLength: x0, k, friction, mass } = this.conditions;
         const { sign, min, abs } = Math;
         let x = this.state.position;
         for (let i = 0; i < cycles; i++) {
             const springForce = -k * (x - x0);
-            const frictionForce = min(friction * mass, abs(springForce)) * sign(-this.state.velocity);
+            const frictionForce = min(friction * mass * g, abs(springForce)) * sign(-this.state.velocity);
             const force = frictionForce + springForce;
-            this.state.velocity += force * cycleStep;
+            this.state.velocity += (force / mass) * cycleStep;
             x += this.state.velocity * cycleStep;
         }
         this.state.position = x;
