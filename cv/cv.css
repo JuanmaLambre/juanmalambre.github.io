@@ -355,6 +355,12 @@ body {
   height: 250px;
 }
 
+#pk-single-waves-canvas {
+  margin: 0.7rem;
+  width: calc(100% - 1.4rem);
+  height: 250px;
+}
+
 #breathing-circle {
   align-self: center;
   height: 300px;
