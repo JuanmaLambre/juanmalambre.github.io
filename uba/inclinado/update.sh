@@ -3,6 +3,8 @@
 ORIGIN_DIR="/Users/juanme/workplace/UBATIC/vite-blender"
 DESTINATION_DIR="/Users/juanme/workplace/juanmalambre.github.io/uba/inclinado"
 
+rm -rf assets
+
 cd $ORIGIN_DIR
 npm run build
 cp -r dist/** $DESTINATION_DIR
