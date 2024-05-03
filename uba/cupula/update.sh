@@ -9,7 +9,7 @@ cp -r dist/** $DESTINATION_DIR
 
 cd $DESTINATION_DIR
 mv _astro astro
-sed -i -e 's/_astro/astro/g' index.html
+sed -i -e 's/_astro/uba\/cupula\/astro/g' index.html
 
 git add . -A
 git commit -am "Update cupula"
