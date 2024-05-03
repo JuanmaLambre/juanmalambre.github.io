@@ -9,6 +9,8 @@ cd $ORIGIN_DIR
 npm run build
 cp -r dist/** $DESTINATION_DIR
 
+sed -i -e 's:/assets/:/uba/inclinado/assets/:g' index.html
+
 cd $DESTINATION_DIR
 git add . -A
 git commit -am "Update cupula"
