@@ -2611,7 +2611,7 @@ var Dat;
     function init() {
         gui = new dat.GUI();
         gui.add(Dat.options, "playpause").name("⏵︎⏸︎");
-        gui.add(Dat.options, "speed", 0, 3).name("Velocidad").onChange(datChangeDispatcher("dg-speed"));
+        gui.add(Dat.options, "speed", 0, 1).name("Velocidad").onChange(datChangeDispatcher("dg-speed"));
         gui.add(Dat.options, "2D").onChange(datChangeDispatcher("dg-2D"));
         const model = gui.addFolder("Modelo");
         model
@@ -2895,109 +2895,29 @@ class SpringModel {
         this.reset();
     }
     reset() {
-        this.state = { position: this.conditions.initPosition, velocity: 0 };
+        const { idleLength: x0, initPosition: d0, radius: R } = this.conditions;
+        const d = d0 - x0;
+        this.state = {
+            time: 0,
+            position: this.conditions.initPosition,
+            velocity: 0,
+            acceleration: 0,
+            rotation: -(d / R),
+            angularVel: 0,
+            angularAcc: 0,
+        };
     }
     step(timestep) {
-        const cycles = 20;
-        const g = 9.81;
-        const cycleStep = timestep / cycles;
-        const { idleLength: x0, k, friction, mass } = this.conditions;
-        const { sign, min, abs } = Math;
-        let x = this.state.position;
-        for (let i = 0; i < cycles; i++) {
-            const springForce = -k * (x - x0);
-            const frictionForce = min(friction * mass * g, abs(springForce)) * sign(-this.state.velocity);
-            const force = frictionForce + springForce;
-            this.state.velocity += (force / mass) * cycleStep;
-            x += this.state.velocity * cycleStep;
-        }
-        this.state.position = x;
+        const { cos, sqrt, PI } = Math;
+        const { idleLength: x0, k, mass, initPosition: d0, radius: R } = this.conditions;
+        const d = d0 - x0;
+        const t = (this.state.time += timestep);
+        const c = sqrt((2 * k) / 3 / mass);
+        this.state.position = d * cos(c * t) + x0;
+        this.state.rotation = -(d / R) * cos(c * t);
     }
 }
 exports.SpringModel = SpringModel;
-
-
-/***/ }),
-
-/***/ "./src/SpringObject.ts":
-/*!*****************************!*\
-  !*** ./src/SpringObject.ts ***!
-  \*****************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SpringObject = void 0;
-const THREE = __importStar(__webpack_require__(/*! three */ "./node_modules/three/build/three.cjs"));
-const HelixCurve_1 = __webpack_require__(/*! ./HelixCurve */ "./src/HelixCurve.ts");
-class SpringObject extends THREE.Object3D {
-    constructor(params) {
-        super();
-        this.disposables = [];
-        this.springMesh = new THREE.Mesh();
-        this.add(this.springMesh);
-        this.reset(params);
-    }
-    get currentLength() {
-        return this.idleLength + this.deltaX;
-    }
-    dispose() {
-        this.disposables.forEach((o) => o.dispose());
-        this.disposables.length = 0;
-    }
-    reset(params) {
-        if (params) {
-            this.thickness = params.thickness;
-            this.layLength = params.layLength;
-            this.idleLength = params.idleLength;
-            this.radius = params.radius;
-            this.deltaX = params.deltaX || 0;
-        }
-        this.dispose();
-        // Calculate new length & layLength with compression
-        const loopsCount = this.idleLength / this.layLength;
-        const compressedLength = this.idleLength + this.deltaX;
-        const compressedLayLength = compressedLength / loopsCount;
-        const pathSegments = 16 * loopsCount;
-        const profileSegments = 16;
-        const helix = new HelixCurve_1.HelixCurve(this.radius, compressedLayLength, compressedLength);
-        const profile = new THREE.EllipseCurve(0, 0, this.thickness / 2, this.thickness / 2, 0, 2 * Math.PI, false, 0);
-        const shape = new THREE.Shape(profile.getPoints(profileSegments));
-        const geom = new THREE.ExtrudeGeometry(shape, {
-            steps: pathSegments,
-            curveSegments: profileSegments,
-            extrudePath: helix,
-        });
-        const mat = new THREE.MeshPhongMaterial({ color: 0x0c0c0c });
-        this.disposables.push(geom, mat);
-        this.springMesh.geometry = geom;
-        this.springMesh.material = mat;
-    }
-}
-exports.SpringObject = SpringObject;
 
 
 /***/ }),
@@ -3035,28 +2955,30 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SpringSystem = void 0;
 const THREE = __importStar(__webpack_require__(/*! three */ "./node_modules/three/build/three.cjs"));
-const SpringObject_1 = __webpack_require__(/*! ./SpringObject */ "./src/SpringObject.ts");
+const SpringCylinder_1 = __webpack_require__(/*! ./cylinder/SpringCylinder */ "./src/cylinder/SpringCylinder.ts");
 const DatGUI_1 = __webpack_require__(/*! ./DatGUI */ "./src/DatGUI.ts");
 const RulerObject_1 = __webpack_require__(/*! ./ruler/RulerObject */ "./src/ruler/RulerObject.ts");
 const GuideObject_1 = __webpack_require__(/*! ./GuideObject */ "./src/GuideObject.ts");
+const SpringCylinderMaterial_1 = __webpack_require__(/*! ./cylinder/SpringCylinderMaterial */ "./src/cylinder/SpringCylinderMaterial.ts");
+const VariablesUI_1 = __webpack_require__(/*! ./utils/VariablesUI */ "./src/utils/VariablesUI.ts");
 class SpringSystem extends THREE.Group {
     constructor(params) {
         super();
         this.isPlaying = true;
         this.animationSpeed = 1;
         this.model = params.model;
-        this.spring = new SpringObject_1.SpringObject({
+        this.spring = new SpringCylinder_1.SpringCylinder({
             thickness: 0.05,
             layLength: 1,
             idleLength: this.model.conditions.idleLength,
-            radius: 0.25,
+            radius: this.model.conditions.radius,
         });
         this.add(this.spring);
         // Build mass object
-        const massMaterial = new THREE.MeshPhongMaterial({ color: 0x8b322c });
+        const massMaterial = new SpringCylinderMaterial_1.SpringCylinderMaterial();
         this.massObject = new THREE.Mesh(undefined, massMaterial);
         this.add(this.massObject);
-        this.updateMassObject();
+        this.updateMassGeometry();
         // Ruler
         this.ruler = new RulerObject_1.RulerObject({ length: 10 });
         this.ruler.rotateX(Math.PI / 2);
@@ -3096,7 +3018,8 @@ class SpringSystem extends THREE.Group {
             this.resetAnimation();
         });
         DatGUI_1.Dat.addDatChangeListener("dg-radius", (e) => {
-            this.updateMassObject();
+            this.model.conditions.radius = e.value;
+            this.updateMassGeometry();
             this.resetAnimation();
         });
         DatGUI_1.Dat.addDatFinishChangeListener("dg-k", (e) => (this.isPlaying = true));
@@ -3117,15 +3040,18 @@ class SpringSystem extends THREE.Group {
         }
         this.model.step(dt * this.animationSpeed);
         this.updateToModel();
+        VariablesUI_1.VariablesUI.update(this.model);
     }
     resetAnimation() {
         this.model.reset();
         this.updateToModel();
+        VariablesUI_1.VariablesUI.update(this.model);
         this.isPlaying = false;
     }
     updateToModel() {
         const x = this.model.state.position;
-        this.massObject.position.setX(x);
+        this.massObject.position.setX(x + this.model.conditions.radius);
+        this.massObject.setRotationFromAxisAngle(new THREE.Vector3(0, 0, 1), this.model.state.rotation);
         this.spring.deltaX = x - this.model.conditions.idleLength;
         this.spring.reset();
         if (this.guide.visible) {
@@ -3137,19 +3063,169 @@ class SpringSystem extends THREE.Group {
             this.guide.rebuild();
         }
     }
-    updateMassObject() {
+    updateMassGeometry() {
         var _a;
         (_a = this.massObject.geometry) === null || _a === void 0 ? void 0 : _a.dispose();
         const radius = DatGUI_1.Dat.options.radius;
         const geometry = new THREE.CylinderGeometry(radius, radius, 2, 24);
         geometry.rotateX(Math.PI / 2);
-        geometry.translate(radius, 0, 0);
         this.massObject.geometry = geometry;
         this.massObject.position.setY(radius);
         this.spring.position.setY(radius);
     }
 }
 exports.SpringSystem = SpringSystem;
+
+
+/***/ }),
+
+/***/ "./src/cylinder/SpringCylinder.ts":
+/*!****************************************!*\
+  !*** ./src/cylinder/SpringCylinder.ts ***!
+  \****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SpringCylinder = void 0;
+const THREE = __importStar(__webpack_require__(/*! three */ "./node_modules/three/build/three.cjs"));
+const HelixCurve_1 = __webpack_require__(/*! ../HelixCurve */ "./src/HelixCurve.ts");
+class SpringCylinder extends THREE.Object3D {
+    constructor(params) {
+        super();
+        this.disposables = [];
+        this.springMesh = new THREE.Mesh();
+        this.add(this.springMesh);
+        this.reset(params);
+    }
+    get currentLength() {
+        return this.idleLength + this.deltaX;
+    }
+    dispose() {
+        this.disposables.forEach((o) => o.dispose());
+        this.disposables.length = 0;
+    }
+    reset(params) {
+        if (params) {
+            this.thickness = params.thickness;
+            this.layLength = params.layLength;
+            this.idleLength = params.idleLength;
+            this.radius = params.radius;
+            this.deltaX = params.deltaX || 0;
+        }
+        this.dispose();
+        // Calculate new length & layLength with compression
+        const loopsCount = this.idleLength / this.layLength;
+        const compressedLength = this.idleLength + this.deltaX;
+        const compressedLayLength = compressedLength / loopsCount;
+        const pathSegments = 16 * loopsCount;
+        const profileSegments = 16;
+        const helix = new HelixCurve_1.HelixCurve(this.radius, compressedLayLength, compressedLength);
+        const profile = new THREE.EllipseCurve(0, 0, this.thickness / 2, this.thickness / 2, 0, 2 * Math.PI, false, 0);
+        const shape = new THREE.Shape(profile.getPoints(profileSegments));
+        const geom = new THREE.ExtrudeGeometry(shape, {
+            steps: pathSegments,
+            curveSegments: profileSegments,
+            extrudePath: helix,
+        });
+        const mat = new THREE.MeshPhongMaterial({ color: 0x0 });
+        this.disposables.push(geom, mat);
+        this.springMesh.geometry = geom;
+        this.springMesh.material = mat;
+    }
+}
+exports.SpringCylinder = SpringCylinder;
+
+
+/***/ }),
+
+/***/ "./src/cylinder/SpringCylinderMaterial.ts":
+/*!************************************************!*\
+  !*** ./src/cylinder/SpringCylinderMaterial.ts ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SpringCylinderMaterial = void 0;
+const THREE = __importStar(__webpack_require__(/*! three */ "./node_modules/three/build/three.cjs"));
+class SpringCylinderMaterial extends THREE.ShaderMaterial {
+    constructor() {
+        super({
+            uniforms: {
+                uDivisions: { value: 6 },
+                uColor1: { value: [0.0, 0.4, 0.4] },
+                uColor2: { value: [0.6, 0.6, 0.6] },
+            },
+            vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+            fragmentShader: `
+        precision mediump float;
+        #define PI 3.141592
+        varying vec2 vUv;
+        uniform float uDivisions;
+        uniform vec3 uColor1, uColor2;
+        
+        void main() {
+          vec2 uv = round(sin(vUv * PI * uDivisions)/2.0 + 0.5);
+          gl_FragColor = vec4(uv.x == uv.y ? uColor1 : uColor2, 1.0);
+        }
+      `,
+        });
+    }
+}
+exports.SpringCylinderMaterial = SpringCylinderMaterial;
 
 
 /***/ }),
@@ -3235,6 +3311,7 @@ function createScene() {
         friction: DatGUI_1.Dat.options.friction,
         idleLength: 5,
         initPosition: 5 + DatGUI_1.Dat.options.deltaX,
+        radius: DatGUI_1.Dat.options.radius,
     });
     springSystem = new SpringSystem_1.SpringSystem({ model });
     scene.add(springSystem);
@@ -3454,6 +3531,31 @@ var AssetsManager;
         throw new Error(`AssetsManager: filepath ${filepath} has no mapped extension`);
     }
 })(AssetsManager = exports.AssetsManager || (exports.AssetsManager = {}));
+
+
+/***/ }),
+
+/***/ "./src/utils/VariablesUI.ts":
+/*!**********************************!*\
+  !*** ./src/utils/VariablesUI.ts ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.VariablesUI = void 0;
+var VariablesUI;
+(function (VariablesUI) {
+    const time = document.querySelector("#variables-container .time .value");
+    const position = document.querySelector("#variables-container .position .value");
+    const rotation = document.querySelector("#variables-container .rotation .value");
+    function update(model) {
+        time.textContent = model.state.time.toFixed(2);
+        position.textContent = model.state.position.toFixed(2);
+        rotation.textContent = model.state.rotation.toFixed(2);
+    }
+    VariablesUI.update = update;
+})(VariablesUI = exports.VariablesUI || (exports.VariablesUI = {}));
 
 
 /***/ }),
