@@ -21719,10 +21719,11 @@ const UniformUpdater_1 = __webpack_require__(/*! ../nodes/UniformUpdater */ "./s
 const ContextMenu_1 = __webpack_require__(/*! ./ContextMenu */ "./src/gui/ContextMenu.ts");
 const UniformUpdatedBuilder_1 = __webpack_require__(/*! ./UniformUpdatedBuilder */ "./src/gui/UniformUpdatedBuilder.ts");
 class NumberContextMenu extends ContextMenu_1.ContextMenu {
-    constructor(node, declaration) {
+    constructor(node, declaration, htmlElement) {
         super();
         this.node = node;
         this.declaration = declaration;
+        this.htmlElement = htmlElement;
         this.createNewItem("Set updater...", this.onSetUpdater.bind(this));
     }
     onSetUpdater() {
@@ -21749,6 +21750,7 @@ class NumberContextMenu extends ContextMenu_1.ContextMenu {
                 node: this.node,
                 varName: this.declaration.varName,
                 func: fn,
+                onUpdate: (v) => (this.htmlElement.querySelector("input").value = v.toString()),
             });
         };
         builder.oncancel = () => {
@@ -21951,7 +21953,7 @@ class UniformEntry extends HTMLElement {
             this.addEventListener("contextmenu", (ev) => {
                 ev.stopPropagation();
                 ev.preventDefault();
-                const context = new NumberContextMenu_1.NumberContextMenu(node, declaration);
+                const context = new NumberContextMenu_1.NumberContextMenu(node, declaration, this);
                 const { clientX, clientY } = ev;
                 context.positionAt(clientX, clientY);
             });
@@ -22362,6 +22364,10 @@ function onContextMenu(ev) {
     const context = new DocumentContextMenu_1.DocumentContextMenu({ renderer });
     context.positionAt(ev.clientX, ev.clientY);
 }
+function toggleNodes() {
+    const div = document.getElementById(config_1.config.nodesContainerId);
+    div.style.display = div.checkVisibility() ? "none" : null;
+}
 function setup() {
     renderer.setClearColor(0x0);
     renderer.clear();
@@ -22371,6 +22377,10 @@ function setup() {
     onResize();
     const container = document.getElementById(config_1.config.nodesContainerId);
     container.addEventListener("contextmenu", onContextMenu);
+    window.addEventListener("keydown", (ev) => {
+        if (ev.key == "q")
+            toggleNodes();
+    });
     setupWindowFuncs();
     clock.start();
     renderer.setAnimationLoop(update);
@@ -22896,16 +22906,19 @@ const HLSLShaderPass_1 = __webpack_require__(/*! ./HLSLShaderPass */ "./src/node
 class UniformUpdater {
     static update() {
         this.updaters.forEach((updater) => {
+            var _a;
             if (!updater.uniform)
                 return;
             const t = HLSLShaderPass_1.HLSLShaderPass.time;
             updater.uniform.value = updater.func(t);
+            (_a = updater.onUpdate) === null || _a === void 0 ? void 0 : _a.call(updater, updater.uniform.value);
         });
     }
     constructor(props) {
-        const { node, varName, func } = props;
+        const { node, varName, func, onUpdate } = props;
         this.uniform = node.pass.uniforms[varName];
         this.func = func;
+        this.onUpdate = onUpdate;
         UniformUpdater.updaters.push(this);
         if (!this.uniform)
             console.error(`Variable ${varName} does not exist in ${node.name}`);
