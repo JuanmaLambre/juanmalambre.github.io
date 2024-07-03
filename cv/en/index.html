@@ -66,15 +66,23 @@
 
         <div class="resume">
           <div class="resume-col1">
-            <div class="topic-content topic-experience" style="height: 749px;">
+            <div class="topic-content topic-experience">
               <div class="topic-title">
                 <img class="topic-icon" src="../assets/xp.svg"></img>
                 Experiences
               </div>
 
               <div class="experience">
+                <span class="xp-title paragraph-title">PHYSICS ANIMATIONS @ UBATIC (UBA)</span>
+                <span class="xp-time paragraph-subtitle">PRESENT DAY</span>
+                <span class="xp-description paragraph-desc">
+                  Design & development of animations for the Physics I course at the Faculty of Engineering, Buenos Aires University. This involved creating 3D scenes, numerically solving mathematical models and developing dynamic animations based on user-defined parameters.
+                </span>
+              </div>
+
+              <div class="experience">
                 <span class="xp-title paragraph-title">VR DEVELOPMENT @ CITEP (UBA)</span>
-                <span class="xp-time paragraph-subtitle">MARCH 2023 - AUGUST 2023</span>
+                <span class="xp-time paragraph-subtitle">MARCH 2023 - SEPTEMBER 2023</span>
                 <span class="xp-description paragraph-desc">
                   Freelance design & development on interactive VR web apps using Three.js, destined to be used in university courses
                 </span>
@@ -120,8 +128,6 @@
                 <span class="xp-description paragraph-desc">
                   Development of internal SDK (web & mobile) for user navigation data collection.
                   Maintainment of data science paltforms for high-performance data processing and consulting.
-                  <br/>
-                  Full-stack development for user loyalty program.
                 </span>
               </div>
 
@@ -132,35 +138,8 @@
                   Development on web services and back-end paltforms for mobile apps
                 </span>
               </div>
-            </div>
-
-            <canvas id="pk-single-waves-canvas"></canvas>
-
-            <div class="topic-content topic-studies">
-              <div class="topic-title">
-                <img class="topic-icon" src="../assets/edu.svg"></img>
-                Studies
-              </div>
-
-              <div class="study">
-                <span class="study-title paragraph-title">SOFTWARE ENGINEER @ UBA</span>
-                <span class="study-time paragraph-subtitle">GRADUATED IN 2020</span>
-              </div>
-
-              <div class="study">
-                <span class="study-title paragraph-title">Academic Exchange @ FIB UPC</span>
-                <span class="study-time paragraph-subtitle">FEBRUARY 2016 - JULY 2016</span>
-                <span class="study-description paragraph-desc">
-                  Artificial intelligence, Advanced Operating Systems, Interfaces desgin and interaction
-                </span>
-              </div>
-
-              <div class="study">
-                <span class="study-title paragraph-title">Bilingual Baccalaureate in Letters and Science @ St. Xavier's College</span>
-                <span class="study-time paragraph-subtitle">GRADUATED IN 2011</span>
-              </div>
-            </div>
-          </div>
+            </div> <!-- /Experience -->
+          </div> <!-- /col 1 -->
 
           <div class="resume-col2">
             <div class="topic-content topic-about">
@@ -199,9 +178,8 @@
                 <span class="skill react">ReactJS</span>
                 <span class="skill py">Python</span>
                 <span class="skill webgl">WebGL</span>
-                <span class="skill java">Java</span>
               </div>
-            </div>
+            </div> <!-- Skills -->
 
             <div class="topic-content topic-languages">
               <div class="topic-title">
@@ -218,15 +196,48 @@
                 <span class="language-name">English</span>
                 <span class="language-level">C1</span>
               </div>
-            </div>
+            </div> <!-- /Languages -->
+          </div> <!-- /col 2 -->
+        </div> <!-- /Resume -->
 
+        <canvas id="pk-single-waves-canvas"></canvas>
+
+        <div class="resume">
+          <div class="resume-col2">
             <div id="maurer-container">
               <canvas id="maurer-canvas"></canvas>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </div> <!-- col 2 -->
+
+          <div class="resume-col1">
+            <div class="topic-content topic-studies">
+              <div class="topic-title">
+                <img class="topic-icon" src="../assets/edu.svg"></img>
+                Studies
+              </div>
+
+              <div class="study">
+                <span class="study-title paragraph-title">SOFTWARE ENGINEER @ UBA</span>
+                <span class="study-time paragraph-subtitle">GRADUATED IN 2020</span>
+              </div>
+
+              <div class="study">
+                <span class="study-title paragraph-title">Academic Exchange @ FIB UPC</span>
+                <span class="study-time paragraph-subtitle">FEBRUARY 2016 - JULY 2016</span>
+                <span class="study-description paragraph-desc">
+                  Artificial intelligence, Advanced Operating Systems, Interfaces desgin and interaction
+                </span>
+              </div>
+
+              <div class="study">
+                <span class="study-title paragraph-title">Bilingual Baccalaureate in Letters and Science @ St. Xavier's College</span>
+                <span class="study-time paragraph-subtitle">GRADUATED IN 2011</span>
+              </div>
+            </div> <!-- /Studies -->
+          </div> <!-- col 1 -->
+        </div> <!-- /Resume -->
+      </div> <!-- /page -->
+    </div> <!-- /content -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../scripts/circle-pixels-cloud.js"></script>  

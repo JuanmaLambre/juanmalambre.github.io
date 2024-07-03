@@ -70,7 +70,7 @@ new p5((s) => {
     shader.setUniform("uTime", millis / 1000);
     shader.setUniform("uSize", [width, height]);
     shader.setUniform("uColor", [0xc7 / 0xff, 0x47 / 0xff, 0xd1 / 0xff]);
-    shader.setUniform("uMagnitude", 10.2);
+    shader.setUniform("uMagnitude", 5.2);
     shader.setUniform("uWeight", 1.782);
     shader.setUniform("uSpeed", 0.7);
   }
