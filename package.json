@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && mv dist/* .",
+    "build": "rm -rf dist assets && tsc -b && vite build && mv dist/* .",
     "lint": "eslint .",
     "preview": "vite preview"
   },
