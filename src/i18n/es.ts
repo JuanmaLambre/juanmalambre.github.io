@@ -10,6 +10,7 @@ export const es = {
     role: "Ingeniero de Software",
     tagline: "Un pie en el software, otro en el arte.",
     cta: "Ver proyectos",
+    downloadPdf: "Descargar PDF",
   },
   about: {
     title: "Sobre mí",

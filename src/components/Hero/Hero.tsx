@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useLanguage } from "../../hooks/useLanguage";
 import { HeroCanvas } from "./HeroCanvas";
+import { CvDocument } from "../CvDocument";
 
 export function Hero() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
@@ -13,7 +15,8 @@ export function Hero() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 50%, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent)",
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 50%, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent)",
         }}
       />
 
@@ -33,8 +36,11 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="font-display font-extrabold text-[clamp(3rem,10vw,8rem)] leading-none tracking-tight text-foreground"
         >
-          Juan Manuel{" "}
-          <span className="text-primary" style={{ textShadow: "0 0 40px color-mix(in srgb, var(--color-primary) 50%, transparent)" }}>
+          {"Juan Manuel "}
+          <span
+            className="text-primary"
+            style={{ textShadow: "0 0 40px color-mix(in srgb, var(--color-primary) 50%, transparent)" }}
+          >
             Lambre
           </span>
         </motion.h1>
@@ -48,18 +54,35 @@ export function Hero() {
           {t.hero.tagline}
         </motion.p>
 
-        <motion.a
-          href="#projects"
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.1 }}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-flex items-center gap-2 mt-10 px-8 py-3 rounded-full border border-primary text-primary font-body font-medium hover:bg-primary hover:text-white transition-all duration-200 glow-primary"
+          className="flex flex-wrap items-center justify-center gap-4 mt-10"
         >
-          {t.hero.cta}
-          <span className="text-lg">↓</span>
-        </motion.a>
+          <motion.a
+            href="#projects"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-primary text-primary font-body font-medium hover:bg-primary hover:text-white transition-all duration-200 glow-primary"
+          >
+            {t.hero.cta}
+            <span className="text-lg">↓</span>
+          </motion.a>
+
+          <PDFDownloadLink document={<CvDocument lang={lang} />} fileName={`juan-manuel-lambre-cv-${lang}.pdf`}>
+            {({ loading }) => (
+              <motion.span
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-border text-muted font-body font-medium hover:border-primary hover:text-primary transition-all duration-200 cursor-pointer"
+              >
+                {loading ? "..." : t.hero.downloadPdf}
+                <span className="text-base">↓</span>
+              </motion.span>
+            )}
+          </PDFDownloadLink>
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}

@@ -10,6 +10,7 @@ export const en = {
     role: "Software Engineer",
     tagline: "One foot in software, one in art.",
     cta: "See projects",
+    downloadPdf: "Download PDF",
   },
   about: {
     title: "About me",

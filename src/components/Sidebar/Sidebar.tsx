@@ -1,5 +1,7 @@
 import { useTheme } from "../../hooks/useTheme";
 import { useLanguage } from "../../hooks/useLanguage";
+import { CvDocument } from "../CvDocument";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export function Sidebar() {
   const { theme, toggle: toggleTheme } = useTheme();
@@ -67,14 +69,14 @@ export function Sidebar() {
           >
             Email
           </a>
-          <a
-            href="oldies/cv/en/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
+
+          <PDFDownloadLink
+            document={<CvDocument lang={lang} />}
+            fileName={`juan-manuel-lambre-cv-${lang}.pdf`}
             className="font-mono text-[0.65rem] tracking-[0.1em] text-muted hover:text-primary transition-colors"
           >
             CV
-          </a>
+          </PDFDownloadLink>
         </div>
 
         {/* Toggles */}
