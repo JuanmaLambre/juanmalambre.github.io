@@ -1,0 +1,14 @@
+body {
+  background-color: black;
+}
+
+.showcase {
+  height: inherit;
+  margin: 1rem;
+  width: inherit;
+}
+
+#curves-surface {
+  height: 400px;
+  width: 400px;
+}

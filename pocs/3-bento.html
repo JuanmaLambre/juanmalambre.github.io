@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POC 3 — Bento Grid</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@400;500&family=JetBrains+Mono:wght@400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #05050C;
+    --surface: #0E0E1A;
+    --surface2: #111120;
+    --primary: #E066B2;
+    --secondary: #00B4CC;
+    --text: #F0EEFF;
+    --muted: #6B6590;
+    --border: #1E1E30;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    padding: 1.5rem;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--text);
+  }
+
+  nav ul { list-style: none; display: flex; gap: 1.5rem; }
+
+  nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  nav a:hover { color: var(--primary); }
+
+  /* BENTO GRID */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 80px;
+    gap: 1rem;
+  }
+
+  .cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .cell:hover {
+    border-color: rgba(224,102,178,0.3);
+    box-shadow: 0 4px 30px rgba(224,102,178,0.08);
+  }
+
+  /* Grid placements */
+  .cell-hero     { grid-column: span 7; grid-row: span 5; }
+  .cell-status   { grid-column: span 5; grid-row: span 2; }
+  .cell-contact  { grid-column: span 5; grid-row: span 3; }
+  .cell-proj1    { grid-column: span 4; grid-row: span 3; }
+  .cell-proj2    { grid-column: span 4; grid-row: span 3; }
+  .cell-proj3    { grid-column: span 4; grid-row: span 3; }
+  .cell-skills   { grid-column: span 8; grid-row: span 3; }
+  .cell-xp       { grid-column: span 4; grid-row: span 3; }
+
+  /* HERO cell */
+  .cell-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    background: radial-gradient(ellipse 80% 60% at 30% 60%, rgba(224,102,178,0.07), transparent);
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-name .accent { color: var(--primary); text-shadow: 0 0 50px rgba(224,102,178,0.4); }
+
+  .hero-sub {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 340px;
+  }
+
+  /* STATUS cell — disponible / info */
+  .cell-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: #4ade80;
+    background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.2);
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+    width: fit-content;
+  }
+
+  .status-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 6px #4ade80;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .status-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--text);
+  }
+
+  .status-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* CONTACT cell */
+  .cell-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(224,102,178,0.08), transparent);
+    border-color: rgba(224,102,178,0.2);
+    cursor: pointer;
+  }
+
+  .contact-cta {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .contact-cta span { color: var(--primary); }
+
+  .contact-email {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--secondary);
+    text-decoration: none;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .contact-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+    transition: all 0.15s;
+  }
+
+  .contact-links a:hover { color: var(--primary); border-color: var(--primary); }
+
+  /* PROJECT cells */
+  .proj-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .proj-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+  }
+
+  .proj-desc {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--secondary);
+    border: 1px solid rgba(0,180,204,0.25);
+    padding: 0.15rem 0.4rem;
+    border-radius: 100px;
+  }
+
+  .cell-proj1, .cell-proj2, .cell-proj3 {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .cell-proj1:hover, .cell-proj2:hover, .cell-proj3:hover {
+    border-color: rgba(224,102,178,0.4);
+    transform: translateY(-2px);
+  }
+
+  .proj-arrow {
+    position: absolute;
+    top: 1.2rem; right: 1.2rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    transition: color 0.15s;
+  }
+
+  .cell-proj1:hover .proj-arrow,
+  .cell-proj2:hover .proj-arrow,
+  .cell-proj3:hover .proj-arrow { color: var(--primary); }
+
+  /* SKILLS cell */
+  .cell-skills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .skills-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--secondary);
+  }
+
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .skill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--muted);
+    transition: all 0.15s;
+    cursor: default;
+  }
+
+  .skill:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* XP cell */
+  .cell-xp { overflow: auto; }
+
+  .xp-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+  }
+
+  .xp-item { margin-bottom: 1rem; }
+
+  .xp-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--text);
+  }
+
+  .xp-org {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--primary);
+  }
+
+  .xp-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">JML</span>
+  <ul>
+    <li><a href="#">Proyectos</a></li>
+    <li><a href="#">Experiencia</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="bento">
+
+  <!-- HERO -->
+  <div class="cell cell-hero">
+    <p class="hero-label">Ingeniero de Software · Buenos Aires</p>
+    <h1 class="hero-name">
+      Juan Manuel<br>
+      <span class="accent">Lambre</span>
+    </h1>
+    <p class="hero-sub">Un pie en el software, otro en el arte. Full stack, WebGL, arte generativo.</p>
+  </div>
+
+  <!-- STATUS -->
+  <div class="cell cell-status">
+    <div class="status-badge"><div class="status-dot"></div>Disponible</div>
+    <div>
+      <p class="status-text">The Amalgama</p>
+      <p class="status-sub">Full Stack Engineer · 2024 – Actualidad</p>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="cell cell-contact">
+    <p class="contact-cta">¿Construimos algo <span>juntos?</span></p>
+    <a class="contact-email" href="mailto:juanmlambre@gmail.com">juanmlambre@gmail.com</a>
+    <div class="contact-links">
+      <a href="#">GitHub</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">CV</a>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="cell cell-proj1">
+    <span class="proj-arrow">↗</span>
+    <p class="proj-num">01</p>
+    <p class="proj-title">Animaciones de Física (UBA)</p>
+    <p class="proj-desc">Simulaciones 3D interactivas para cursos universitarios.</p>
+    <div class="proj-tags"><span class="tag">Three.js</span><span class="tag">WebGL</span><span class="tag">VR</span></div>
+  </div>
+
+  <div class="cell cell-proj2">
+    <span class="proj-arrow">↗</span>
+    <p class="proj-num">02</p>
+    <p class="proj-title">Caleidoscopio</p>
+    <p class="proj-desc">Arte generativo con canvas en tiempo real.</p>
+    <div class="proj-tags"><span class="tag">Canvas API</span><span class="tag">Generativo</span></div>
+  </div>
+
+  <div class="cell cell-proj3">
+    <span class="proj-arrow">↗</span>
+    <p class="proj-num">03</p>
+    <p class="proj-title">Raspadita Digital (YPF)</p>
+    <p class="proj-desc">Raspadita WebGL para campaña de marketing.</p>
+    <div class="proj-tags"><span class="tag">WebGL</span><span class="tag">JavaScript</span></div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="cell cell-skills">
+    <p class="skills-label">Habilidades</p>
+    <div class="skills-wrap">
+      <span class="skill">React</span>
+      <span class="skill">TypeScript</span>
+      <span class="skill">Three.js</span>
+      <span class="skill">WebGL</span>
+      <span class="skill">p5.js</span>
+      <span class="skill">GLSL</span>
+      <span class="skill">Node.js</span>
+      <span class="skill">Python</span>
+      <span class="skill">PostgreSQL</span>
+      <span class="skill">AWS</span>
+      <span class="skill">Docker</span>
+      <span class="skill">Arte generativo</span>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="cell cell-xp">
+    <p class="xp-label">Experiencia</p>
+    <div class="xp-item">
+      <p class="xp-title">Ingeniero Full Stack</p>
+      <p class="xp-org">The Amalgama</p>
+      <p class="xp-period">2024 – Actualidad</p>
+    </div>
+    <div class="xp-item">
+      <p class="xp-title">Física / VR @ UBA</p>
+      <p class="xp-org">Universidad de Buenos Aires</p>
+      <p class="xp-period">2023 – Actualidad</p>
+    </div>
+    <div class="xp-item">
+      <p class="xp-title">Ingeniero de Software</p>
+      <p class="xp-org">Mercado Libre</p>
+      <p class="xp-period">2020 – 2022</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

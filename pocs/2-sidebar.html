@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POC 2 — Sidebar fijo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@700&family=Bebas+Neue&family=Unbounded:wght@700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Bricolage+Grotesque:wght@700;800&family=DM+Serif+Display&family=Outfit:wght@400;500&family=JetBrains+Mono:wght@400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #05050C;
+    --surface: #0E0E1A;
+    --primary: #E066B2;
+    --secondary: #00B4CC;
+    --text: #F0EEFF;
+    --muted: #6B6590;
+    --border: #1E1E30;
+    --sidebar-w: 300px;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 2rem;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .sidebar-top { flex: 1; }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .logo span { color: var(--primary); }
+
+  .role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 2.5rem;
+  }
+
+  .sidebar-bio {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    border-left: 2px solid var(--primary);
+    padding-left: 1rem;
+  }
+
+  .sidebar-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 3rem;
+  }
+
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.15s;
+  }
+
+  .sidebar-nav a:hover {
+    background: rgba(224,102,178,0.08);
+    color: var(--primary);
+  }
+
+  .nav-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .sidebar-nav a:hover .nav-dot { background: var(--primary); }
+
+  .sidebar-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .sidebar-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.15s;
+  }
+
+  .sidebar-links a:hover { color: var(--primary); }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    padding: 5rem 4rem;
+    max-width: 860px;
+  }
+
+  /* SECTION */
+  .section { margin-bottom: 7rem; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--text);
+  }
+
+  .section-header .line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PROJECTS — cards compactas */
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .project-card:hover {
+    border-color: rgba(224,102,178,0.5);
+    box-shadow: 0 4px 30px rgba(224,102,178,0.1);
+    transform: translateY(-2px);
+  }
+
+  .project-card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .project-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .project-card-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .project-card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 100px;
+    border: 1px solid rgba(0,180,204,0.3);
+    color: var(--secondary);
+  }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+
+  .timeline-item {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+    padding-bottom: 2rem;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1rem;
+    flex-shrink: 0;
+    padding-top: 0.35rem;
+  }
+
+  .tl-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    background: var(--bg);
+    box-shadow: 0 0 10px rgba(224,102,178,0.5);
+    flex-shrink: 0;
+  }
+
+  .tl-line {
+    flex: 1;
+    width: 1px;
+    background: var(--border);
+    margin-top: 6px;
+  }
+
+  .timeline-item:last-child .tl-line { display: none; }
+
+  .timeline-content { padding-bottom: 0.5rem; }
+
+  .tl-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--secondary);
+    margin-bottom: 0.25rem;
+  }
+
+  .tl-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.15rem;
+  }
+
+  .tl-org {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .tl-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: all 0.15s;
+    cursor: default;
+  }
+
+  .skill-item:hover {
+    color: var(--primary);
+    border-color: rgba(224,102,178,0.4);
+  }
+
+  .skill-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--secondary); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="logo">Juan Manuel<br><span>Lambre</span></div>
+    <p class="role">Software Engineer</p>
+
+    <p class="sidebar-bio">
+      Un pie en el software, otro en el arte. Desarrollo full stack, visualización 3D y arte generativo.
+    </p>
+
+    <ul class="sidebar-nav">
+      <li><a href="#projects"><span class="nav-dot"></span>Proyectos</a></li>
+      <li><a href="#experience"><span class="nav-dot"></span>Experiencia</a></li>
+      <li><a href="#skills"><span class="nav-dot"></span>Habilidades</a></li>
+      <li><a href="#contact"><span class="nav-dot"></span>Contacto</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-links">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Email</a>
+    <a href="#">CV</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-header">
+      <h2>Proyectos</h2>
+      <div class="line"></div>
+    </div>
+    <div class="project-grid">
+      <a class="project-card" href="#">
+        <p class="project-card-num">01</p>
+        <p class="project-card-title">Animaciones de Física (UBA)</p>
+        <p class="project-card-desc">Simulaciones 3D interactivas para cursos universitarios.</p>
+        <div class="project-card-tags">
+          <span class="tag">Three.js</span><span class="tag">WebGL</span><span class="tag">VR</span>
+        </div>
+      </a>
+      <a class="project-card" href="#">
+        <p class="project-card-num">02</p>
+        <p class="project-card-title">Caleidoscopio</p>
+        <p class="project-card-desc">Arte generativo con canvas en tiempo real.</p>
+        <div class="project-card-tags">
+          <span class="tag">Canvas API</span><span class="tag">Generativo</span>
+        </div>
+      </a>
+      <a class="project-card" href="#">
+        <p class="project-card-num">03</p>
+        <p class="project-card-title">Raspadita Digital (YPF)</p>
+        <p class="project-card-desc">Raspadita WebGL para campaña de marketing.</p>
+        <div class="project-card-tags">
+          <span class="tag">WebGL</span><span class="tag">JavaScript</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="section-header">
+      <h2>Experiencia</h2>
+      <div class="line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="timeline-content">
+          <p class="tl-period">Agosto 2024 – Actualidad</p>
+          <p class="tl-title">Ingeniero Full Stack</p>
+          <p class="tl-org">The Amalgama</p>
+          <p class="tl-desc">Desarrollo full stack de webapp con arquitectura cloud.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="timeline-content">
+          <p class="tl-period">2023 – Actualidad</p>
+          <p class="tl-title">Animaciones de Física @ UBATIC</p>
+          <p class="tl-org">Universidad de Buenos Aires</p>
+          <p class="tl-desc">Escenas 3D y simulaciones físicas interactivas para ingeniería.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="timeline-content">
+          <p class="tl-period">2020 – 2022</p>
+          <p class="tl-title">Ingeniero de Software</p>
+          <p class="tl-org">Mercado Libre</p>
+          <p class="tl-desc">Servicios backend de alta escala en la mayor plataforma de e-commerce de LATAM.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="section-header">
+      <h2>Habilidades</h2>
+      <div class="line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item"><span class="skill-dot"></span>React</div>
+      <div class="skill-item"><span class="skill-dot"></span>TypeScript</div>
+      <div class="skill-item"><span class="skill-dot"></span>Three.js</div>
+      <div class="skill-item"><span class="skill-dot"></span>WebGL / GLSL</div>
+      <div class="skill-item"><span class="skill-dot"></span>p5.js</div>
+      <div class="skill-item"><span class="skill-dot"></span>Node.js</div>
+      <div class="skill-item"><span class="skill-dot"></span>Python</div>
+      <div class="skill-item"><span class="skill-dot"></span>PostgreSQL</div>
+      <div class="skill-item"><span class="skill-dot"></span>AWS</div>
+      <div class="skill-item"><span class="skill-dot"></span>Docker</div>
+      <div class="skill-item"><span class="skill-dot"></span>Arte generativo</div>
+      <div class="skill-item"><span class="skill-dot"></span>Figma</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="padding-bottom: 4rem;">
+    <div class="section-header">
+      <h2>Contacto</h2>
+      <div class="line"></div>
+    </div>
+    <p class="display-font" style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
+      Construyamos algo <span style="color: var(--primary);">juntos.</span>
+    </p>
+    <a href="mailto:juanmlambre@gmail.com" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--secondary); text-decoration: none; border-bottom: 1px solid var(--secondary); padding-bottom: 2px;">
+      juanmlambre@gmail.com
+    </a>
+  </section>
+
+</main>
+
+<!-- FONT PICKER -->
+<div id="font-picker">
+  <div id="font-picker-label">Fuente display</div>
+  <div id="font-options"></div>
+</div>
+
+<style>
+  #font-picker {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    z-index: 999;
+    min-width: 220px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+
+  #font-picker-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  #font-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .font-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .font-option:hover { background: rgba(255,255,255,0.04); border-color: var(--border); }
+
+  .font-option.active {
+    background: rgba(224,102,178,0.1);
+    border-color: rgba(224,102,178,0.4);
+  }
+
+  .font-option-name {
+    font-size: 0.78rem;
+    color: var(--text);
+  }
+
+  .font-option-preview {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--muted);
+    line-height: 1;
+  }
+
+  .font-option.active .font-option-preview { color: var(--primary); }
+</style>
+
+<script>
+  const FONTS = [
+    { label: 'Syne',               family: "'Syne', sans-serif",              weight: '800' },
+    { label: 'Space Grotesk',      family: "'Space Grotesk', sans-serif",      weight: '700' },
+    { label: 'Unbounded',          family: "'Unbounded', sans-serif",           weight: '800' },
+    { label: 'Bricolage Grotesque',family: "'Bricolage Grotesque', sans-serif", weight: '800' },
+    { label: 'Plus Jakarta Sans',  family: "'Plus Jakarta Sans', sans-serif",   weight: '800' },
+    { label: 'Bebas Neue',         family: "'Bebas Neue', sans-serif",          weight: '400' },
+    { label: 'DM Serif Display',   family: "'DM Serif Display', serif",         weight: '400' },
+  ];
+
+  const container = document.getElementById('font-options');
+  let activeIdx = 0;
+
+  function applyFont(idx) {
+    const f = FONTS[idx];
+    // Apply to all display-font elements
+    document.querySelectorAll('.display-font, .logo, .section-header h2, .tl-title, .project-card-title, .contact-title, .contact-big').forEach(el => {
+      el.style.fontFamily = f.family;
+    });
+    // Update active state
+    document.querySelectorAll('.font-option').forEach((opt, i) => {
+      opt.classList.toggle('active', i === idx);
+    });
+    activeIdx = idx;
+  }
+
+  FONTS.forEach((f, i) => {
+    const btn = document.createElement('div');
+    btn.className = 'font-option' + (i === 0 ? ' active' : '');
+    btn.innerHTML = `
+      <span class="font-option-name">${f.label}</span>
+      <span class="font-option-preview" style="font-family: ${f.family}; font-weight: ${f.weight};">Aa</span>
+    `;
+    btn.addEventListener('click', () => applyFont(i));
+    container.appendChild(btn);
+  });
+
+  // Mark all display elements on load
+  document.querySelectorAll('.logo, .section-header h2, .tl-title, .project-card-title').forEach(el => {
+    el.classList.add('display-font');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My 3D Project</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+      }
+      header,
+      footer {
+        background: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      .section {
+        margin: 20px 0;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .section img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px 0;
+      }
+      .section h2 {
+        color: #333;
+      }
+      h1 {
+        margin: 0;
+        padding: 20px 0;
+        font-size: 2.5em;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      p,
+      ul {
+        font-size: 1.1em;
+        line-height: 1.6;
+      }
+      img {
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>My 3D Project</h1>
+    </header>
+
+    <div class="container">
+      <div class="section" id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          This project showcases a 3D model of a virtual environment developed using WebGL and Three.js. The goal was to
+          create an immersive and interactive experience for users.
+        </p>
+      </div>
+
+      <div class="section" id="technical-details">
+        <h2>Technical Details</h2>
+        <p>
+          The project was built using WebGL for rendering 3D graphics and Three.js as the 3D library. The application
+          also incorporates HTML5, CSS3, and JavaScript for the user interface and interactivity.
+        </p>
+        <ul>
+          <li><strong>WebGL:</strong> A JavaScript API for rendering 3D graphics within any compatible web browser.</li>
+          <li>
+            <strong>Three.js:</strong> A cross-browser JavaScript library used to create and display animated 3D
+            graphics.
+          </li>
+          <li><strong>HTML5 & CSS3:</strong> For structuring and styling the web page.</li>
+          <li><strong>JavaScript:</strong> For adding interactivity to the application.</li>
+        </ul>
+      </div>
+
+      <div class="section" id="screenshots">
+        <h2>Screenshots</h2>
+        <img src="images/screenshot1.png" alt="Screenshot 1" />
+        <img src="images/screenshot2.png" alt="Screenshot 2" />
+        <img src="images/screenshot3.png" alt="Screenshot 3" />
+      </div>
+
+      <div class="section" id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          This project demonstrates the capabilities of WebGL and Three.js in creating complex and interactive 3D
+          environments. Future improvements could include adding more interactive elements and optimizing performance
+          for better user experience.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 My 3D Project</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+@config "../../tailwind.config.ts";
+@import "tailwindcss";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/outfit/400.css";
+@import "@fontsource/outfit/500.css";
+@import "@fontsource/jetbrains-mono/400.css";
+
+/* ─── Font tokens (for var() usage in body/base styles) ──── */
+@theme {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* ─── Color tokens — dark (default) ─────────────────────── */
+:root {
+  --color-background: #05050c;
+  --color-surface: #0e0e1a;
+  --color-surface-hover: #161626;
+  --color-border: #1e1e30;
+  --color-primary: #e066b2;
+  --color-secondary: #00b4cc;
+  --color-foreground: #f0eeff;
+  --color-muted: #6b6590;
+}
+
+/* ─── Color tokens — light ───────────────────────────────── */
+html.light {
+  color-scheme: light;
+  --color-background: #f5f2ff;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f0ecff;
+  --color-border: #d9d4f0;
+  --color-foreground: #1a1730;
+  --color-muted: #8b85a8;
+}
+
+/* ─── Base ────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* ─── Glow utilities ─────────────────────────────────────── */
+@layer utilities {
+  .glow-primary {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  }
+  .glow-primary-lg {
+    box-shadow:
+      0 0 40px color-mix(in srgb, var(--color-primary) 35%, transparent),
+      0 0 80px color-mix(in srgb, var(--color-primary) 15%, transparent);
+  }
+}
