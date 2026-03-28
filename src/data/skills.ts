@@ -2,31 +2,21 @@ export type SkillCategory = "frontend" | "backend" | "3d" | "tools";
 
 export interface Skill {
   name: string;
+  level: 1 | 2 | 3 | 4 | 5; // 1 = básico, 5 = experto
   category: SkillCategory;
+  pos: { x: number; y: number }; // posición en la nube (% del contenedor)
 }
 
 export const skills: Skill[] = [
-  // Frontend
-  { name: "React", category: "frontend" },
-  { name: "TypeScript", category: "frontend" },
-  { name: "JavaScript", category: "frontend" },
-  { name: "HTML / CSS", category: "frontend" },
-  { name: "Tailwind CSS", category: "frontend" },
-  // 3D / Creative
-  { name: "Three.js", category: "3d" },
-  { name: "WebGL", category: "3d" },
-  { name: "p5.js", category: "3d" },
-  { name: "GLSL", category: "3d" },
-  { name: "Arte generativo", category: "3d" },
-  // Backend
-  { name: "Node.js", category: "backend" },
-  { name: "Python", category: "backend" },
-  { name: "REST APIs", category: "backend" },
-  { name: "PostgreSQL", category: "backend" },
-  { name: "AWS", category: "backend" },
-  // Tools
-  { name: "Git", category: "tools" },
-  { name: "Vite", category: "tools" },
-  { name: "Docker", category: "tools" },
-  { name: "Figma", category: "tools" },
+  { name: "React",      level: 5, category: "frontend", pos: { x: 22, y: 28 } },
+  { name: "JavaScript", level: 5, category: "frontend", pos: { x: 55, y: 65 } },
+  { name: "TypeScript", level: 4, category: "frontend", pos: { x: 74, y: 20 } },
+  { name: "Three.js",   level: 4, category: "3d",       pos: { x: 20, y: 70 } },
+  { name: "Node.js",    level: 4, category: "backend",  pos: { x: 48, y: 85 } },
+  { name: "p5.js",      level: 4, category: "3d",       pos: { x: 42, y: 12 } },
+  { name: "GLSL",       level: 3, category: "3d",       pos: { x: 82, y: 48 } },
+  { name: "Python",     level: 3, category: "backend",  pos: { x: 33, y: 48 } },
+  { name: "PostgreSQL", level: 3, category: "backend",  pos: { x: 64, y: 34 } },
+  { name: "Docker",     level: 2, category: "tools",    pos: { x: 10, y: 50 } },
+  { name: "AWS",        level: 2, category: "backend",  pos: { x: 88, y: 76 } },
 ];

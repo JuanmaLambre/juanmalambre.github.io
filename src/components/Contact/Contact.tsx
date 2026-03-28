@@ -14,7 +14,7 @@ export function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="font-display font-bold text-[2rem] leading-tight text-foreground mb-4"
+        className="font-display font-bold text-[1.5rem] sm:text-[2rem] leading-tight text-foreground mb-4"
       >
         {t.contact.title.split(" ").map((word, i, arr) =>
           i === arr.length - 1

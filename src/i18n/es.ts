@@ -22,6 +22,12 @@ export const es = {
   },
   skills: {
     title: "Habilidades",
+    categories: {
+      frontend: "Frontend",
+      backend: "Backend",
+      "3d": "3D & Creativo",
+      tools: "Herramientas",
+    },
   },
   experience: {
     title: "Experiencia",
@@ -37,6 +43,16 @@ export const es = {
   contact: {
     title: "Construyamos algo juntos.",
     email: "juanmlambre@gmail.com",
+  },
+  cv: {
+    personalInfo: "Información personal",
+    phone: "Teléfono",
+    location: "Ubicación",
+    birth: "Nacimiento",
+    birthDate: "27 de diciembre de 1993",
+    pronouns: "Pronombres",
+    pronounsValue: "Él, ellos/ellxs",
+    education: "Educación",
   },
   footer: {
     made: "Hecho con",

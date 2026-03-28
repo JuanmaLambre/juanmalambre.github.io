@@ -4,7 +4,7 @@ import { useTheme } from "../../hooks/useTheme";
 import { useLanguage } from "../../hooks/useLanguage";
 import { useScrolled } from "../../hooks/useScrollDirection";
 
-export function Navbar() {
+export function MobileNavbar() {
   const { theme, toggle: toggleTheme } = useTheme();
   const { lang, t, toggle: toggleLang } = useLanguage();
   const scrolled = useScrolled();
@@ -12,43 +12,23 @@ export function Navbar() {
 
   const links = [
     { href: "#about", label: t.nav.about },
-    { href: "#skills", label: t.nav.skills },
-    { href: "#experience", label: t.nav.experience },
     { href: "#projects", label: t.nav.projects },
+    { href: "#experience", label: t.nav.experience },
+    { href: "#skills", label: t.nav.skills },
     { href: "#contact", label: t.nav.contact },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "backdrop-blur-md bg-background/80 border-b border-border"
-          : "bg-transparent"
+      className={`lg:hidden fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "backdrop-blur-md bg-background/80 border-b border-border" : "bg-transparent"
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a
-          href="#"
-          className="font-display font-bold text-lg text-foreground hover:text-primary transition-colors"
-        >
+        <a href="#" className="font-display font-bold text-lg text-foreground hover:text-primary transition-colors">
           JML
         </a>
-
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {links.map(link => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm font-body text-muted hover:text-primary transition-colors relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary transition-all duration-200 group-hover:w-full" />
-              </a>
-            </li>
-          ))}
-        </ul>
 
         {/* Controls */}
         <div className="flex items-center gap-3">
@@ -79,13 +59,17 @@ export function Navbar() {
 
           {/* Hamburger */}
           <button
-            onClick={() => setMenuOpen(o => !o)}
+            onClick={() => setMenuOpen((o) => !o)}
             aria-label="Toggle menu"
-            className="md:hidden w-8 h-8 flex flex-col justify-center gap-1.5"
+            className="w-8 h-8 flex flex-col justify-center gap-1.5"
           >
-            <span className={`block h-px bg-foreground transition-all ${menuOpen ? "rotate-45 translate-y-1.5" : ""}`} />
+            <span
+              className={`block h-px bg-foreground transition-all ${menuOpen ? "rotate-45 translate-y-1.5" : ""}`}
+            />
             <span className={`block h-px bg-foreground transition-all ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-px bg-foreground transition-all ${menuOpen ? "-rotate-45 -translate-y-2.5" : ""}`} />
+            <span
+              className={`block h-px bg-foreground transition-all ${menuOpen ? "-rotate-45 -translate-y-2.5" : ""}`}
+            />
           </button>
         </div>
       </nav>
@@ -97,10 +81,10 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden bg-surface border-b border-border px-6 py-4"
+            className="bg-surface border-b border-border px-6 py-4"
           >
             <ul className="flex flex-col gap-4">
-              {links.map(link => (
+              {links.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}

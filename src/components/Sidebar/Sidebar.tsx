@@ -15,7 +15,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="fixed top-0 left-0 bottom-0 w-[300px] border-r border-border flex flex-col p-10 bg-background z-10 overflow-y-auto">
+    <aside className="hidden lg:flex fixed top-0 left-0 bottom-0 w-[300px] border-r border-border flex-col p-10 bg-background z-10 overflow-y-auto">
       <div className="flex-1">
         {/* Name */}
         <div className="font-display font-bold text-[1.6rem] leading-[1.1] text-foreground mb-1">

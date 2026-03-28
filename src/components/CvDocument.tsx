@@ -1,6 +1,6 @@
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { experience } from "../data/experience";
-import { skills } from "../data/skills";
+import { skills, type SkillCategory } from "../data/skills";
 import type { Lang } from "../hooks/useLanguage";
 import { en } from "../i18n/en";
 import { es } from "../i18n/es";
@@ -99,6 +99,23 @@ const styles = StyleSheet.create({
     borderBottomColor: BORDER,
   },
 
+  // ── Personal info ───────────────────────────────────────
+  infoItem: {
+    marginBottom: 6,
+  },
+  infoLabel: {
+    fontSize: 6.5,
+    fontFamily: "Helvetica-Bold",
+    color: MUTED,
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
+    marginBottom: 1,
+  },
+  infoValue: {
+    fontSize: 8,
+    color: DARK,
+  },
+
   // ── Skills ──────────────────────────────────────────────
   skillCategory: {
     marginBottom: 7,
@@ -178,12 +195,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const skillGroups: { label: string; category: string }[] = [
-  { label: "Frontend", category: "frontend" },
-  { label: "Backend", category: "backend" },
-  { label: "3D & Creative", category: "3d" },
-  { label: "Tools", category: "tools" },
-];
+const skillCategoryOrder: SkillCategory[] = ["frontend", "backend", "3d", "tools"];
 
 interface Props {
   lang: Lang;
@@ -223,17 +235,35 @@ export function CvDocument({ lang }: Props) {
         <View style={styles.body}>
           {/* ── Left sidebar ── */}
           <View style={styles.leftCol}>
+            {/* Personal info */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{t.cv.personalInfo}</Text>
+              {[
+                { label: t.cv.phone,    value: "+54 9 11 6542 2582" },
+                { label: t.cv.location, value: "Palermo, CABA, Argentina" },
+                { label: t.cv.birth,    value: t.cv.birthDate },
+                { label: t.cv.pronouns, value: t.cv.pronounsValue },
+              ].map(({ label, value }) => (
+                <View key={label} style={styles.infoItem}>
+                  <Text style={styles.infoLabel}>{label}</Text>
+                  <Text style={styles.infoValue}>{value}</Text>
+                </View>
+              ))}
+            </View>
+
             {/* Skills */}
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>{t.skills.title}</Text>
-              {skillGroups.map(({ label, category }) => {
+              {skillCategoryOrder.map((category) => {
                 const names = skills
                   .filter((s) => s.category === category)
                   .map((s) => s.name)
                   .join(", ");
                 return (
                   <View key={category} style={styles.skillCategory}>
-                    <Text style={styles.skillCategoryName}>{label}</Text>
+                    <Text style={styles.skillCategoryName}>
+                      {t.skills.categories[category]}
+                    </Text>
                     <Text style={styles.skillList}>{names}</Text>
                   </View>
                 );
@@ -242,7 +272,7 @@ export function CvDocument({ lang }: Props) {
 
             {/* Education */}
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{lang === "es" ? "Educación" : "Education"}</Text>
+              <Text style={styles.sectionTitle}>{t.cv.education}</Text>
               {eduEntries.map((entry) => (
                 <View key={entry.id} style={styles.eduEntry}>
                   <Text style={styles.eduTitle}>{l(entry.title)}</Text>

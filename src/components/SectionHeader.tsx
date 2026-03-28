@@ -9,7 +9,7 @@ export function SectionHeader({ title }: { title: string }) {
       transition={{ duration: 0.4 }}
       className="flex items-center gap-4 mb-10"
     >
-      <h2 className="font-display font-bold text-[1.8rem] text-foreground whitespace-nowrap">{title}</h2>
+      <h2 className="font-display font-bold text-[1.5rem] sm:text-[1.8rem] text-foreground">{title}</h2>
       <div className="h-px flex-1 bg-border" />
     </motion.div>
   );
