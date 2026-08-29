@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0b0d12;
+  --color-surface: #141824;
+  --color-surface-hover: #1c2233;
+  --color-border: #262c3d;
+  --color-foreground: #e8ebf2;
+  --color-muted: #8b93a7;
+  --color-primary: #6ee7b7;
+  --color-secondary: #a78bfa;
+
+  /* Código Secreto board colors: 60% saturation, 35% lightness.
+     The -light variants keep the team names readable on the dark background. */
+  --color-team-red: hsl(353 60% 35%);
+  --color-team-blue: hsl(211 60% 35%);
+  --color-team-red-light: hsl(353 60% 65%);
+  --color-team-blue-light: hsl(211 60% 65%);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
