@@ -4,6 +4,7 @@ React + Vite + Tailwind (plain JavaScript, no TypeScript). It is a project of it
 separate from the main site: install and build it from this folder.
 
 ```bash
+nvm use      # Node 26, see .nvmrc
 yarn install
 yarn dev      # http://localhost:5173/apps/
 yarn build    # writes index.html, assets/ and one folder per app right here
