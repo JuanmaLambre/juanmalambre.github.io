@@ -65,6 +65,7 @@ export function Tricount() {
         expenses: current.expenses.filter((expense) => expense.id !== id),
       })),
     onRenameGroup: (name) => updateGroup(() => ({ name })),
+    onClearGroup: () => updateGroup(() => ({ participants: [], expenses: [] })),
     onAddParticipant: (name) =>
       updateGroup((current) => ({
         participants: [...current.participants, { id: createId(), name }],

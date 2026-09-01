@@ -63,7 +63,7 @@ function ExpenseCard({ expense, participants, onEdit, onRemove }) {
   );
 }
 
-export function ExpensesView({ group, onAddExpense, onUpdateExpense, onRemoveExpense }) {
+export function ExpensesView({ group, onAddExpense, onUpdateExpense, onRemoveExpense, onClearGroup }) {
   // null: the form is closed. "new" or an expense id: the form is open on it.
   const [editing, setEditing] = useState(null);
 
@@ -82,6 +82,10 @@ export function ExpensesView({ group, onAddExpense, onUpdateExpense, onRemoveExp
   const total = group.expenses.reduce((sum, expense) => sum + expense.amount, 0);
   const expenses = [...group.expenses].sort((a, b) => b.createdAt - a.createdAt);
   const editingExpense = group.expenses.find((expense) => expense.id === editing);
+
+  const clearAll = () => {
+    if (window.confirm("¿Borrar todos los gastos y participantes? No se puede deshacer.")) onClearGroup();
+  };
 
   const save = (expense) => {
     if (editingExpense) onUpdateExpense(editingExpense.id, expense);
@@ -123,6 +127,12 @@ export function ExpensesView({ group, onAddExpense, onUpdateExpense, onRemoveExp
           ))}
         </ul>
       )}
+
+      <div className="flex justify-end border-t border-border pt-4">
+        <button className="text-sm text-muted hover:text-rose-400" onClick={clearAll}>
+          Borrar todo
+        </button>
+      </div>
     </div>
   );
 }
