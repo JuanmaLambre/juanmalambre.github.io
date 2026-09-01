@@ -9,9 +9,11 @@
     "dev": "vite",
     "build": "rm -rf dist assets && vite build && cp -R dist/. . && rm -rf dist",
     "lint": "eslint .",
+    "test": "node --test src/",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "2.2.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },

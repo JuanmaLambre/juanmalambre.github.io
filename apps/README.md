@@ -9,6 +9,7 @@ yarn install
 yarn dev      # http://localhost:5173/apps/
 yarn build    # writes index.html, assets/ and one folder per app right here
 yarn lint
+yarn test    # node --test, sólo la lógica (sin DOM)
 ```
 
 The build is served as part of GitHub Pages under `/apps/`, so Vite's `base` is
@@ -30,7 +31,8 @@ No need to touch `vite.config.js`: it treats any folder under `src/` with an
 ```
 src/
   index.html, main.jsx, Home.jsx   → /apps/
-  codigo-secreto/                    → /apps/codigo-secreto/
+  codigo-secreto/                  → /apps/codigo-secreto/
+  tricount/                        → /apps/tricount/ (gastos en localStorage)
   shared/                          Layout, app catalog, mount helper
   styles/index.css                 Tailwind + color tokens
 ```

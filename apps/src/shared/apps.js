@@ -7,6 +7,12 @@ export const apps = [
     description: "Tablero de 5x5 al azar: 9 casilleros para el que empieza, 8 para el otro.",
     emoji: "🃏",
   },
+  {
+    slug: "tricount",
+    title: "Tricount",
+    description: "Gastos compartidos de un grupo: quién debe cuánto y a quién para quedar a mano.",
+    emoji: "🧾",
+  },
 ];
 
 export const appUrl = (slug) => `${import.meta.env.BASE_URL}${slug}/`;
