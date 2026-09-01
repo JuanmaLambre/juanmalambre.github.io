@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDownIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useShortcut } from "../shared/useShortcut";
 import { ExpenseForm } from "./ExpenseForm";
 import { formatMoney, formatPercent } from "./money";
 import { splitExpense } from "./settlement";
@@ -11,9 +12,7 @@ function ExpenseCard({ expense, participants, onEdit, onRemove }) {
   // Collapsed the card only says what and who; the split opens on click.
   const [open, setOpen] = useState(false);
   const nameOf = (id) => participants.find((participant) => participant.id === id)?.name ?? "?";
-  const shareByParticipant = new Map(
-    splitExpense(expense).map((part) => [part.participantId, part.amount]),
-  );
+  const shareByParticipant = new Map(splitExpense(expense).map((part) => [part.participantId, part.amount]));
 
   return (
     <li className={CARD}>
@@ -23,9 +22,7 @@ function ExpenseCard({ expense, participants, onEdit, onRemove }) {
           onClick={() => setOpen(!open)}
           aria-expanded={open}
         >
-          <ChevronDownIcon
-            className={`size-4 shrink-0 text-muted transition-transform ${open ? "rotate-180" : ""}`}
-          />
+          <ChevronDownIcon className={`size-4 shrink-0 text-muted transition-transform ${open ? "rotate-180" : ""}`} />
           <span className="min-w-0 flex-1">
             <span className="block truncate font-medium">{expense.name}</span>
             <span className="block text-sm text-muted">
@@ -55,8 +52,7 @@ function ExpenseCard({ expense, participants, onEdit, onRemove }) {
           {expense.shares.map((share) => (
             <li key={share.participantId} className="flex justify-between gap-4">
               <span>
-                {nameOf(share.participantId)}{" "}
-                <span className="text-xs">({formatPercent(share.percent)}%)</span>
+                {nameOf(share.participantId)} <span className="text-xs">({formatPercent(share.percent)}%)</span>
               </span>
               <span>{formatMoney(shareByParticipant.get(share.participantId) ?? 0)}</span>
             </li>
@@ -71,11 +67,14 @@ export function ExpensesView({ group, onAddExpense, onUpdateExpense, onRemoveExp
   // null: the form is closed. "new" or an expense id: the form is open on it.
   const [editing, setEditing] = useState(null);
 
+  const canAdd = group.participants.length > 0 && editing === null;
+  useShortcut("c", () => setEditing("new"), { enabled: canAdd });
+
   if (group.participants.length === 0) {
     return (
       <p className="text-sm text-muted">
-        Todavía no hay participantes. Agregalos en <strong className="text-foreground">Grupo</strong>{" "}
-        y después cargá el primer gasto.
+        Todavía no hay participantes. Agregalos en <strong className="text-foreground">Grupo</strong> y después cargá el
+        primer gasto.
       </p>
     );
   }
@@ -102,7 +101,7 @@ export function ExpensesView({ group, onAddExpense, onUpdateExpense, onRemoveExp
         />
       ) : (
         <div className="flex items-baseline justify-between gap-4">
-          <button className={PRIMARY_BUTTON} onClick={() => setEditing("new")}>
+          <button className={PRIMARY_BUTTON} onClick={() => setEditing("new")} title="Nuevo gasto (C)">
             Nuevo gasto
           </button>
           <span className="text-sm text-muted">Total: {formatMoney(total)}</span>
