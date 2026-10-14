@@ -2,9 +2,15 @@
 // between pages. The `slug` must match the folder name inside src/.
 export const apps = [
   {
+    slug: "truco",
+    title: "Truco",
+    description: "Anotador con fósforos hasta 30: quince malas y quince buenas.",
+    emoji: "🧉",
+  },
+  {
     slug: "codigo-secreto",
     title: "Código Secreto",
-    description: "Tablero de 5x5 al azar: 9 casilleros para el que empieza, 8 para el otro.",
+    description: "Tablero configurable para el Código Secreto.",
     emoji: "🃏",
   },
   {
@@ -12,12 +18,6 @@ export const apps = [
     title: "Tricount",
     description: "Gastos compartidos de un grupo: quién debe cuánto y a quién para quedar a mano.",
     emoji: "🧾",
-  },
-  {
-    slug: "truco",
-    title: "Truco",
-    description: "Anotador con fósforos hasta 30: quince malas y quince buenas.",
-    emoji: "🧉",
   },
 ];
 

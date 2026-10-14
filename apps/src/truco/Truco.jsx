@@ -21,13 +21,13 @@ function TeamSide({ team, defaultName, gameOver, onAdd, onRemove, onRename }) {
         className="truco-name w-full truncate rounded-md bg-transparent px-2 py-1 text-center text-xl outline-none sm:text-2xl"
       />
 
-      <div className="relative">
+      <div className="relative flex w-full justify-center">
         <span className={`truco-points text-4xl ${won ? "text-brasa" : ""}`}>{team.points}</span>
         <button
           onClick={onRemove}
           disabled={team.points === 0}
           aria-label={`Sacar un punto a ${label}`}
-          className="truco-remove absolute top-1/2 left-full ml-4 size-7 -translate-y-1/2 text-lg leading-none"
+          className="truco-remove absolute top-1/2 right-0 size-7 -translate-y-1/2 text-lg leading-none"
         >
           −
         </button>
