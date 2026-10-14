@@ -3,7 +3,7 @@ import { apps, appUrl } from "./shared/apps";
 
 export function Home() {
   return (
-    <Layout title="Apps" subtitle="Cosas para jugar un rato" showBack={false}>
+    <Layout title="Apps" showBack={false}>
       <ul className="grid gap-4 sm:grid-cols-2">
         {apps.map((app) => (
           <li key={app.slug}>
