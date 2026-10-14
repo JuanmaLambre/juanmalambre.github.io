@@ -33,6 +33,7 @@ src/
   index.html, main.jsx, Home.jsx   → /apps/
   codigo-secreto/                  → /apps/codigo-secreto/
   tricount/                        → /apps/tricount/ (gastos en localStorage)
+  truco/                           → /apps/truco/ (anotador, puntos en localStorage)
   shared/                          Layout, app catalog, mount helper
   styles/index.css                 Tailwind + color tokens
 ```

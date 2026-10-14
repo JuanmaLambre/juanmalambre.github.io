@@ -1,0 +1,186 @@
+/* Textures for the truco table. Plain CSS because they are layered gradients
+   that would be unreadable as Tailwind arbitrary values. */
+
+.truco-table {
+  /* Dark wooden planks: seams every 9rem, grain along each plank, darker edges. */
+  background-color: #4b2e1a;
+  background-image:
+    radial-gradient(ellipse at center, transparent 40%, rgb(0 0 0 / 0.45) 100%),
+    repeating-linear-gradient(90deg, transparent 0 calc(9rem - 3px), rgb(0 0 0 / 0.45) calc(9rem - 3px) 9rem),
+    repeating-linear-gradient(
+      91deg,
+      rgb(255 255 255 / 0.035) 0 2px,
+      transparent 2px 9px,
+      rgb(0 0 0 / 0.07) 9px 11px,
+      transparent 11px 23px
+    ),
+    repeating-linear-gradient(89deg, transparent 0 31px, rgb(0 0 0 / 0.08) 31px 34px, transparent 34px 57px),
+    linear-gradient(180deg, #6b4226, #4b2e1a);
+  background-attachment: fixed;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.truco-title,
+.truco-name,
+.truco-points {
+  font-family: "Rye", Georgia, serif;
+  text-shadow: 0 2px 0 rgb(0 0 0 / 0.45);
+}
+
+.truco-title {
+  color: var(--color-crema);
+  letter-spacing: 0.04em;
+}
+
+/* Leather mat with a stitched border, like a gaucho's guardamonte. */
+.truco-cuero {
+  background-color: var(--color-cuero);
+  background-image:
+    radial-gradient(circle at 20% 15%, rgb(255 220 170 / 0.08), transparent 45%),
+    radial-gradient(circle at 80% 85%, rgb(0 0 0 / 0.25), transparent 50%),
+    radial-gradient(circle at 60% 30%, rgb(0 0 0 / 0.12), transparent 30%);
+  box-shadow:
+    0 18px 40px rgb(0 0 0 / 0.55),
+    inset 0 0 30px rgb(0 0 0 / 0.5);
+  outline: 2px dashed rgb(241 227 196 / 0.35);
+  outline-offset: -8px;
+}
+
+.truco-cuero > section + section {
+  border-left: 2px dashed rgb(241 227 196 / 0.2);
+  padding-left: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .truco-cuero > section + section {
+    padding-left: 1.5rem;
+  }
+}
+
+.truco-name {
+  color: var(--color-crema);
+  border: 1px solid transparent;
+}
+
+.truco-name:hover {
+  border-color: rgb(241 227 196 / 0.2);
+}
+
+.truco-name:focus {
+  border-color: rgb(241 227 196 / 0.5);
+  background-color: rgb(0 0 0 / 0.2);
+}
+
+/* Small cream buttons, like bone or rawhide tokens. */
+.truco-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgb(241 227 196 / 0.45);
+  background-color: rgb(0 0 0 / 0.25);
+  color: var(--color-crema);
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+.truco-chip:hover:not(:disabled) {
+  background-color: rgb(241 227 196 / 0.15);
+}
+
+.truco-chip:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.truco-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: rgb(241 227 196 / 0.35);
+  background-color: rgb(241 227 196 / 0.05);
+  cursor: pointer;
+  transition:
+    color 150ms,
+    background-color 150ms;
+}
+
+.truco-remove:disabled {
+  visibility: hidden;
+}
+
+.truco-tap {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.truco-tap:disabled {
+  cursor: default;
+}
+
+/* Rawhide strip separating las malas from las buenas. */
+.truco-divider {
+  width: 80%;
+  height: 4px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(90deg, #c9a46c 0 10px, #9c7746 10px 13px);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
+}
+
+/* Six squares stacked per team must fit the screen height, so the size follows
+   the viewport and never outgrows its column. */
+.truco-square {
+  width: min(100%, clamp(3.5rem, calc((100dvh - 17rem) / 6), 7.5rem));
+  aspect-ratio: 1;
+  overflow: visible;
+}
+
+.truco-groove {
+  stroke: rgb(241 227 196 / 0.14);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 6 5;
+}
+
+.truco-match {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: truco-drop 220ms ease-out;
+}
+
+.truco-match-edge {
+  stroke: #5e3a1c;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.truco-match-wood {
+  stroke: #e7c78f;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.truco-match-head {
+  fill: #b5321e;
+  stroke: #6e1a0e;
+  stroke-width: 1.2;
+}
+
+.truco-match-shine {
+  fill: rgb(255 255 255 / 0.35);
+}
+
+@keyframes truco-drop {
+  from {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .truco-match {
+    animation: none;
+  }
+}

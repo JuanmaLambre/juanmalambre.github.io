@@ -16,6 +16,11 @@
   --color-team-blue: hsl(211 60% 35%);
   --color-team-red-light: hsl(353 60% 65%);
   --color-team-blue-light: hsl(211 60% 65%);
+
+  /* Truco: leather, cream chalk and the red of a match head. */
+  --color-cuero: #4a2c1a;
+  --color-crema: #f1e3c4;
+  --color-brasa: #e0603a;
 }
 
 html {

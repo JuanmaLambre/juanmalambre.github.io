@@ -13,6 +13,12 @@ export const apps = [
     description: "Gastos compartidos de un grupo: quién debe cuánto y a quién para quedar a mano.",
     emoji: "🧾",
   },
+  {
+    slug: "truco",
+    title: "Truco",
+    description: "Anotador con fósforos hasta 30: quince malas y quince buenas.",
+    emoji: "🧉",
+  },
 ];
 
 export const appUrl = (slug) => `${import.meta.env.BASE_URL}${slug}/`;
