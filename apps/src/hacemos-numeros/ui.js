@@ -1,4 +1,4 @@
-// Class names shared by the three views, so the markup below stays readable.
+// Class names shared by the sections, so the markup below stays readable.
 export const CARD = "rounded-xl border border-border bg-surface p-4";
 export const INPUT =
   "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary";

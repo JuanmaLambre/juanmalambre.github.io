@@ -14,9 +14,9 @@ export const apps = [
     emoji: "🃏",
   },
   {
-    slug: "tricount",
-    title: "Tricount",
-    description: "Gastos compartidos de un grupo: quién debe cuánto y a quién para quedar a mano.",
+    slug: "hacemos-numeros",
+    title: "Hacemos números",
+    description: "Dividir la cuenta en partes iguales, con gastos que se reparten sólo entre algunos.",
     emoji: "🧾",
   },
 ];
