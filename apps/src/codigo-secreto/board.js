@@ -1,3 +1,5 @@
+import { randomFromSeed, shuffle } from "../shared/random.js";
+
 export const MIN_SIDE = 3;
 export const MAX_SIDE = 8;
 export const MIN_TEAM_CELLS = 1;
@@ -27,30 +29,6 @@ export const isValidSettings = (settings) =>
   settings.team >= MIN_TEAM_CELLS && settings.bombs >= MIN_BOMBS && neutralCells(settings) >= 0;
 
 export const DEFAULT_SETTINGS = { rows: 5, cols: 5, team: defaultTeamCells(5, 5), bombs: DEFAULT_BOMBS };
-
-// Deterministic PRNG (mulberry32) so the same seed always rebuilds the same board.
-function randomFromSeed(seed) {
-  let state = 0;
-  for (const char of seed) {
-    state = (Math.imul(state ^ char.charCodeAt(0), 2654435761) >>> 0) + 1;
-  }
-  return () => {
-    state = (state + 0x6d2b79f5) >>> 0;
-    let t = state;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function shuffle(items, random) {
-  const shuffled = [...items];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
 
 export function buildBoard(seed, settings) {
   const random = randomFromSeed(seed);

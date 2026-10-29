@@ -31,9 +31,10 @@ No need to touch `vite.config.js`: it treats any folder under `src/` with an
 ```
 src/
   index.html, main.jsx, Home.jsx   → /apps/
+  candado/                         → /apps/candado/ (adivinar un número con pistas, generadas en un worker)
   codigo-secreto/                  → /apps/codigo-secreto/
   hacemos-numeros/                 → /apps/hacemos-numeros/ (dividir la cuenta, en localStorage)
   truco/                           → /apps/truco/ (anotador, puntos en localStorage)
-  shared/                          Layout, app catalog, mount helper
+  shared/                          Layout, app catalog, mount helper, seeded random
   styles/index.css                 Tailwind + color tokens
 ```

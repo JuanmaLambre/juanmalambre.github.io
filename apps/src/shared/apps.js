@@ -19,6 +19,12 @@ export const apps = [
     description: "Dividir la cuenta en partes iguales, con gastos que se reparten sólo entre algunos.",
     emoji: "🧾",
   },
+  {
+    slug: "candado",
+    title: "Candado",
+    description: "Deducí el número secreto a partir de pistas. Partidas nuevas siempre, con solución única.",
+    emoji: "🔐",
+  },
 ];
 
 export const appUrl = (slug) => `${import.meta.env.BASE_URL}${slug}/`;
