@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { Layout } from "../shared/Layout";
-import { DIFFICULTIES } from "./puzzle";
+import { DIFFICULTIES, buildPuzzle } from "./puzzle";
 import { createSeed, resolveSeed, resolveSettings, syncUrl } from "./seed";
 import { SettingsDialog } from "./SettingsDialog";
 
@@ -13,21 +13,6 @@ const DIGIT_BOX =
 
 const EXACT_DOT = "text-primary";
 const MISPLACED_DOT = "text-amber-300";
-
-// Builds the puzzle in a worker; null while it is being generated.
-function usePuzzle(seed, settings) {
-  const key = `${seed}:${settings.digits}:${settings.difficulty}`;
-  const [result, setResult] = useState(null);
-
-  useEffect(() => {
-    const worker = new Worker(new URL("./worker.js", import.meta.url), { type: "module" });
-    worker.onmessage = ({ data }) => setResult({ key, puzzle: data });
-    worker.postMessage({ seed, settings });
-    return () => worker.terminate();
-  }, [key]); // eslint-disable-line react-hooks/exhaustive-deps -- the key covers seed and settings
-
-  return result?.key === key ? result.puzzle : null;
-}
 
 function Digits({ number, className = "border-border bg-surface" }) {
   return (
@@ -216,7 +201,9 @@ export function Candado() {
   const [seed, setSeed] = useState(resolveSeed);
   const [settings, setSettings] = useState(resolveSettings);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const puzzle = usePuzzle(seed, settings);
+  const key = `${seed}:${settings.digits}:${settings.difficulty}`;
+  // Long numbers take around a second to generate; the page just waits for it.
+  const puzzle = useMemo(() => buildPuzzle(seed, settings), [key]); // eslint-disable-line react-hooks/exhaustive-deps -- the key covers seed and settings
 
   useEffect(() => syncUrl(seed, settings), [seed, settings]);
 
@@ -232,11 +219,7 @@ export function Candado() {
       title="Candado"
       subtitle={`${settings.digits} dígitos distintos · ${difficultyLabel(settings.difficulty)}`}
     >
-      {puzzle ? (
-        <Game key={`${seed}:${settings.digits}:${settings.difficulty}`} puzzle={puzzle} digits={settings.digits} onNewGame={newGame} />
-      ) : (
-        <p className="py-24 text-center text-sm text-muted">Generando pistas…</p>
-      )}
+      <Game key={key} puzzle={puzzle} digits={settings.digits} onNewGame={newGame} />
 
       <div className="mt-12 flex flex-col items-center">
         <div className="flex items-center gap-2">
